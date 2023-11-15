@@ -20,6 +20,7 @@ public:
             step = range->getRuleContext<qasm3Parser::ExpressionContext>(1)->getText();
         }
 
+        //TODO: Refactor this
         int start_int = stoi(start);
         int end_int = stoi(end->getText());
         step.erase(remove(step.begin(), step.end(), ' '), step.end());
