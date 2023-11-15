@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Lexer -I/home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Parser -isystem /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src
+CXX_INCLUDES = -I/home/alejandro/projects/MCQC/inc -I/home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Lexer -I/home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Parser -isystem /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src
 
-CXX_FLAGS = -std=gnu++20
+CXX_FLAGS = -g -g3 -std=gnu++20
 

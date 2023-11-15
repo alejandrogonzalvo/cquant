@@ -12,6 +12,7 @@ include(ExternalAntlr4Cpp)
 
 include_directories(
     ${ANTLR4_INCLUDE_DIRS}
+    inc
 )
 
 set(ANTLR_EXECUTABLE ${ANTLR_DIR}/antlr-4.13.0-complete.jar)
@@ -31,6 +32,7 @@ antlr_target(OpenQASMParser ${ANTLR_DIR}/qasm3Parser.g4 PARSER
 include_directories(${ANTLR_OpenQASMLexer_OUTPUT_DIR})
 include_directories(${ANTLR_OpenQASMParser_OUTPUT_DIR})
 
+
 # add_library(openqasm_reference_parser STATIC
 #         ${ANTLR_DIR}/openqasm_reference_parser/qasm3Lexer.cpp
 #         ${ANTLR_DIR}/openqasm_reference_parser/qasm3Parser.cpp
@@ -44,4 +46,13 @@ add_executable(mcqc src/mcqc.cpp
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
+
+target_compile_options(mcqc PUBLIC
+-g3
+)
+
+target_compile_options(antlr4_static INTERFACE
+-g3
+)
+
 target_link_libraries(mcqc antlr4_static)

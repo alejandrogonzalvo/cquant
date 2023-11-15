@@ -187,14 +187,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitProgram(this);
-		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -252,14 +244,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_version; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterVersion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitVersion(this);
-		}
 	}
 
 	public final VersionContext version() throws RecognitionException {
@@ -386,14 +370,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitStatement(this);
-		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -682,14 +658,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_annotation; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterAnnotation(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitAnnotation(this);
-		}
 	}
 
 	public final AnnotationContext annotation() throws RecognitionException {
@@ -738,14 +706,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_scope; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterScope(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitScope(this);
-		}
 	}
 
 	public final ScopeContext scope() throws RecognitionException {
@@ -794,14 +754,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pragma; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterPragma(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitPragma(this);
-		}
 	}
 
 	public final PragmaContext pragma() throws RecognitionException {
@@ -839,14 +791,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_statementOrScope; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterStatementOrScope(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitStatementOrScope(this);
-		}
 	}
 
 	public final StatementOrScopeContext statementOrScope() throws RecognitionException {
@@ -952,14 +896,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_calibrationGrammarStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterCalibrationGrammarStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitCalibrationGrammarStatement(this);
-		}
 	}
 
 	public final CalibrationGrammarStatementContext calibrationGrammarStatement() throws RecognitionException {
@@ -996,14 +932,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_includeStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIncludeStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIncludeStatement(this);
-		}
 	}
 
 	public final IncludeStatementContext includeStatement() throws RecognitionException {
@@ -1039,14 +967,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_breakStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBreakStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBreakStatement(this);
-		}
 	}
 
 	public final BreakStatementContext breakStatement() throws RecognitionException {
@@ -1080,14 +1000,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_continueStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterContinueStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitContinueStatement(this);
-		}
 	}
 
 	public final ContinueStatementContext continueStatement() throws RecognitionException {
@@ -1121,14 +1033,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_endStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterEndStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitEndStatement(this);
-		}
 	}
 
 	public final EndStatementContext endStatement() throws RecognitionException {
@@ -1181,14 +1085,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterForStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitForStatement(this);
-		}
 	}
 
 	public final ForStatementContext forStatement() throws RecognitionException {
@@ -1294,14 +1190,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIfStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIfStatement(this);
-		}
 	}
 
 	public final IfStatementContext ifStatement() throws RecognitionException {
@@ -1359,14 +1247,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_returnStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterReturnStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitReturnStatement(this);
-		}
 	}
 
 	public final ReturnStatementContext returnStatement() throws RecognitionException {
@@ -1453,14 +1333,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_whileStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterWhileStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitWhileStatement(this);
-		}
 	}
 
 	public final WhileStatementContext whileStatement() throws RecognitionException {
@@ -1503,14 +1375,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_barrierStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBarrierStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBarrierStatement(this);
-		}
 	}
 
 	public final BarrierStatementContext barrierStatement() throws RecognitionException {
@@ -1560,14 +1424,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_boxStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBoxStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBoxStatement(this);
-		}
 	}
 
 	public final BoxStatementContext boxStatement() throws RecognitionException {
@@ -1618,14 +1474,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_delayStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDelayStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDelayStatement(this);
-		}
 	}
 
 	public final DelayStatementContext delayStatement() throws RecognitionException {
@@ -1690,14 +1538,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gateCallStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterGateCallStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitGateCallStatement(this);
-		}
 	}
 
 	public final GateCallStatementContext gateCallStatement() throws RecognitionException {
@@ -1857,14 +1697,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_measureArrowAssignmentStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterMeasureArrowAssignmentStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitMeasureArrowAssignmentStatement(this);
-		}
 	}
 
 	public final MeasureArrowAssignmentStatementContext measureArrowAssignmentStatement() throws RecognitionException {
@@ -1914,14 +1746,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_resetStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterResetStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitResetStatement(this);
-		}
 	}
 
 	public final ResetStatementContext resetStatement() throws RecognitionException {
@@ -1962,14 +1786,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_aliasDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterAliasDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitAliasDeclarationStatement(this);
-		}
 	}
 
 	public final AliasDeclarationStatementContext aliasDeclarationStatement() throws RecognitionException {
@@ -2019,14 +1835,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_classicalDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterClassicalDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitClassicalDeclarationStatement(this);
-		}
 	}
 
 	public final ClassicalDeclarationStatementContext classicalDeclarationStatement() throws RecognitionException {
@@ -2107,14 +1915,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterConstDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitConstDeclarationStatement(this);
-		}
 	}
 
 	public final ConstDeclarationStatementContext constDeclarationStatement() throws RecognitionException {
@@ -2164,14 +1964,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ioDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIoDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIoDeclarationStatement(this);
-		}
 	}
 
 	public final IoDeclarationStatementContext ioDeclarationStatement() throws RecognitionException {
@@ -2247,14 +2039,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_oldStyleDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterOldStyleDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitOldStyleDeclarationStatement(this);
-		}
 	}
 
 	public final OldStyleDeclarationStatementContext oldStyleDeclarationStatement() throws RecognitionException {
@@ -2312,14 +2096,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_quantumDeclarationStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterQuantumDeclarationStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitQuantumDeclarationStatement(this);
-		}
 	}
 
 	public final QuantumDeclarationStatementContext quantumDeclarationStatement() throws RecognitionException {
@@ -2366,14 +2142,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefStatement(this);
-		}
 	}
 
 	public final DefStatementContext defStatement() throws RecognitionException {
@@ -2443,14 +2211,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_externStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterExternStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitExternStatement(this);
-		}
 	}
 
 	public final ExternStatementContext externStatement() throws RecognitionException {
@@ -2524,14 +2284,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gateStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterGateStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitGateStatement(this);
-		}
 	}
 
 	public final GateStatementContext gateStatement() throws RecognitionException {
@@ -2603,14 +2355,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignmentStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterAssignmentStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitAssignmentStatement(this);
-		}
 	}
 
 	public final AssignmentStatementContext assignmentStatement() throws RecognitionException {
@@ -2701,14 +2445,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expressionStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterExpressionStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitExpressionStatement(this);
-		}
 	}
 
 	public final ExpressionStatementContext expressionStatement() throws RecognitionException {
@@ -2744,14 +2480,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_calStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterCalStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitCalStatement(this);
-		}
 	}
 
 	public final CalStatementContext calStatement() throws RecognitionException {
@@ -2814,14 +2542,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalStatement(this);
-		}
 	}
 
 	public final DefcalStatementContext defcalStatement() throws RecognitionException {
@@ -2919,14 +2639,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode CARET() { return getToken(qasm3Parser.CARET, 0); }
 		public BitwiseXorExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBitwiseXorExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBitwiseXorExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class AdditiveExpressionContext extends ExpressionContext {
@@ -2940,14 +2652,6 @@ public class qasm3Parser extends Parser {
 		public TerminalNode PLUS() { return getToken(qasm3Parser.PLUS, 0); }
 		public TerminalNode MINUS() { return getToken(qasm3Parser.MINUS, 0); }
 		public AdditiveExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterAdditiveExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitAdditiveExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class DurationofExpressionContext extends ExpressionContext {
@@ -2958,14 +2662,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode RPAREN() { return getToken(qasm3Parser.RPAREN, 0); }
 		public DurationofExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDurationofExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDurationofExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ParenthesisExpressionContext extends ExpressionContext {
@@ -2975,14 +2671,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode RPAREN() { return getToken(qasm3Parser.RPAREN, 0); }
 		public ParenthesisExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterParenthesisExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitParenthesisExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ComparisonExpressionContext extends ExpressionContext {
@@ -2995,14 +2683,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode ComparisonOperator() { return getToken(qasm3Parser.ComparisonOperator, 0); }
 		public ComparisonExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterComparisonExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitComparisonExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class MultiplicativeExpressionContext extends ExpressionContext {
@@ -3017,14 +2697,6 @@ public class qasm3Parser extends Parser {
 		public TerminalNode SLASH() { return getToken(qasm3Parser.SLASH, 0); }
 		public TerminalNode PERCENT() { return getToken(qasm3Parser.PERCENT, 0); }
 		public MultiplicativeExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterMultiplicativeExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitMultiplicativeExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LogicalOrExpressionContext extends ExpressionContext {
@@ -3037,14 +2709,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode DOUBLE_PIPE() { return getToken(qasm3Parser.DOUBLE_PIPE, 0); }
 		public LogicalOrExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterLogicalOrExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitLogicalOrExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CastExpressionContext extends ExpressionContext {
@@ -3060,14 +2724,6 @@ public class qasm3Parser extends Parser {
 			return getRuleContext(ArrayTypeContext.class,0);
 		}
 		public CastExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterCastExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitCastExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class PowerExpressionContext extends ExpressionContext {
@@ -3080,14 +2736,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode DOUBLE_ASTERISK() { return getToken(qasm3Parser.DOUBLE_ASTERISK, 0); }
 		public PowerExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterPowerExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitPowerExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BitwiseOrExpressionContext extends ExpressionContext {
@@ -3100,14 +2748,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode PIPE() { return getToken(qasm3Parser.PIPE, 0); }
 		public BitwiseOrExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBitwiseOrExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBitwiseOrExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CallExpressionContext extends ExpressionContext {
@@ -3118,14 +2758,6 @@ public class qasm3Parser extends Parser {
 			return getRuleContext(ExpressionListContext.class,0);
 		}
 		public CallExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterCallExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitCallExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BitshiftExpressionContext extends ExpressionContext {
@@ -3138,14 +2770,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode BitshiftOperator() { return getToken(qasm3Parser.BitshiftOperator, 0); }
 		public BitshiftExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBitshiftExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBitshiftExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BitwiseAndExpressionContext extends ExpressionContext {
@@ -3158,14 +2782,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode AMPERSAND() { return getToken(qasm3Parser.AMPERSAND, 0); }
 		public BitwiseAndExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterBitwiseAndExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitBitwiseAndExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class EqualityExpressionContext extends ExpressionContext {
@@ -3178,14 +2794,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode EqualityOperator() { return getToken(qasm3Parser.EqualityOperator, 0); }
 		public EqualityExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterEqualityExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitEqualityExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LogicalAndExpressionContext extends ExpressionContext {
@@ -3198,14 +2806,6 @@ public class qasm3Parser extends Parser {
 		}
 		public TerminalNode DOUBLE_AMPERSAND() { return getToken(qasm3Parser.DOUBLE_AMPERSAND, 0); }
 		public LogicalAndExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterLogicalAndExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitLogicalAndExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IndexExpressionContext extends ExpressionContext {
@@ -3216,14 +2816,6 @@ public class qasm3Parser extends Parser {
 			return getRuleContext(IndexOperatorContext.class,0);
 		}
 		public IndexExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIndexExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIndexExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class UnaryExpressionContext extends ExpressionContext {
@@ -3235,14 +2827,6 @@ public class qasm3Parser extends Parser {
 		public TerminalNode EXCLAMATION_POINT() { return getToken(qasm3Parser.EXCLAMATION_POINT, 0); }
 		public TerminalNode MINUS() { return getToken(qasm3Parser.MINUS, 0); }
 		public UnaryExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterUnaryExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitUnaryExpression(this);
-		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class LiteralExpressionContext extends ExpressionContext {
@@ -3258,14 +2842,6 @@ public class qasm3Parser extends Parser {
 		public TerminalNode TimingLiteral() { return getToken(qasm3Parser.TimingLiteral, 0); }
 		public TerminalNode HardwareQubit() { return getToken(qasm3Parser.HardwareQubit, 0); }
 		public LiteralExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterLiteralExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitLiteralExpression(this);
-		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -3624,14 +3200,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_aliasExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterAliasExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitAliasExpression(this);
-		}
 	}
 
 	public final AliasExpressionContext aliasExpression() throws RecognitionException {
@@ -3687,14 +3255,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declarationExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDeclarationExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDeclarationExpression(this);
-		}
 	}
 
 	public final DeclarationExpressionContext declarationExpression() throws RecognitionException {
@@ -3775,14 +3335,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_measureExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterMeasureExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitMeasureExpression(this);
-		}
 	}
 
 	public final MeasureExpressionContext measureExpression() throws RecognitionException {
@@ -3824,14 +3376,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rangeExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterRangeExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitRangeExpression(this);
-		}
 	}
 
 	public final RangeExpressionContext rangeExpression() throws RecognitionException {
@@ -3906,14 +3450,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_setExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterSetExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitSetExpression(this);
-		}
 	}
 
 	public final SetExpressionContext setExpression() throws RecognitionException {
@@ -3995,14 +3531,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayLiteral; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterArrayLiteral(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitArrayLiteral(this);
-		}
 	}
 
 	public final ArrayLiteralContext arrayLiteral() throws RecognitionException {
@@ -4169,14 +3697,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexOperator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIndexOperator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIndexOperator(this);
-		}
 	}
 
 	public final IndexOperatorContext indexOperator() throws RecognitionException {
@@ -4317,14 +3837,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexedIdentifier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIndexedIdentifier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIndexedIdentifier(this);
-		}
 	}
 
 	public final IndexedIdentifierContext indexedIdentifier() throws RecognitionException {
@@ -4373,14 +3885,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_returnSignature; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterReturnSignature(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitReturnSignature(this);
-		}
 	}
 
 	public final ReturnSignatureContext returnSignature() throws RecognitionException {
@@ -4422,14 +3926,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gateModifier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterGateModifier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitGateModifier(this);
-		}
 	}
 
 	public final GateModifierContext gateModifier() throws RecognitionException {
@@ -4530,14 +4026,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_scalarType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterScalarType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitScalarType(this);
-		}
 	}
 
 	public final ScalarTypeContext scalarType() throws RecognitionException {
@@ -4700,14 +4188,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_qubitType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterQubitType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitQubitType(this);
-		}
 	}
 
 	public final QubitTypeContext qubitType() throws RecognitionException {
@@ -4758,14 +4238,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterArrayType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitArrayType(this);
-		}
 	}
 
 	public final ArrayTypeContext arrayType() throws RecognitionException {
@@ -4822,14 +4294,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayReferenceType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterArrayReferenceType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitArrayReferenceType(this);
-		}
 	}
 
 	public final ArrayReferenceTypeContext arrayReferenceType() throws RecognitionException {
@@ -4930,14 +4394,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_designator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDesignator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDesignator(this);
-		}
 	}
 
 	public final DesignatorContext designator() throws RecognitionException {
@@ -4975,14 +4431,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalTarget; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalTarget(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalTarget(this);
-		}
 	}
 
 	public final DefcalTargetContext defcalTarget() throws RecognitionException {
@@ -5027,14 +4475,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalArgumentDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalArgumentDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalArgumentDefinition(this);
-		}
 	}
 
 	public final DefcalArgumentDefinitionContext defcalArgumentDefinition() throws RecognitionException {
@@ -5079,14 +4519,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalOperand; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalOperand(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalOperand(this);
-		}
 	}
 
 	public final DefcalOperandContext defcalOperand() throws RecognitionException {
@@ -5129,14 +4561,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gateOperand; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterGateOperand(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitGateOperand(this);
-		}
 	}
 
 	public final GateOperandContext gateOperand() throws RecognitionException {
@@ -5191,14 +4615,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_externArgument; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterExternArgument(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitExternArgument(this);
-		}
 	}
 
 	public final ExternArgumentContext externArgument() throws RecognitionException {
@@ -5285,14 +4701,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argumentDefinition; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterArgumentDefinition(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitArgumentDefinition(this);
-		}
 	}
 
 	public final ArgumentDefinitionContext argumentDefinition() throws RecognitionException {
@@ -5398,14 +4806,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argumentDefinitionList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterArgumentDefinitionList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitArgumentDefinitionList(this);
-		}
 	}
 
 	public final ArgumentDefinitionListContext argumentDefinitionList() throws RecognitionException {
@@ -5475,14 +4875,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalArgumentDefinitionList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalArgumentDefinitionList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalArgumentDefinitionList(this);
-		}
 	}
 
 	public final DefcalArgumentDefinitionListContext defcalArgumentDefinitionList() throws RecognitionException {
@@ -5552,14 +4944,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defcalOperandList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterDefcalOperandList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitDefcalOperandList(this);
-		}
 	}
 
 	public final DefcalOperandListContext defcalOperandList() throws RecognitionException {
@@ -5629,14 +5013,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expressionList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterExpressionList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitExpressionList(this);
-		}
 	}
 
 	public final ExpressionListContext expressionList() throws RecognitionException {
@@ -5704,14 +5080,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_identifierList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterIdentifierList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitIdentifierList(this);
-		}
 	}
 
 	public final IdentifierListContext identifierList() throws RecognitionException {
@@ -5781,14 +5149,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gateOperandList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterGateOperandList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitGateOperandList(this);
-		}
 	}
 
 	public final GateOperandListContext gateOperandList() throws RecognitionException {
@@ -5858,14 +5218,6 @@ public class qasm3Parser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_externArgumentList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).enterExternArgumentList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof qasm3ParserListener ) ((qasm3ParserListener)listener).exitExternArgumentList(this);
-		}
 	}
 
 	public final ExternArgumentListContext externArgumentList() throws RecognitionException {

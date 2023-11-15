@@ -150,6 +150,11 @@ target_include_directories(antlr4_static
         ${ANTLR4_INCLUDE_DIRS}
 )
 
+target_compile_options(antlr4_static
+    INTERFACE
+        -g3
+)
+
 ExternalProject_Add_Step(
     antlr4_runtime
     build_shared

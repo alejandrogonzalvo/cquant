@@ -3015,6 +3015,12 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  ../inc/compiler.hpp \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/antlr4-runtime.h \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/antlr4-common.h \
   /usr/include/c++/11/algorithm \
@@ -3080,11 +3086,6 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
   /usr/include/c++/11/cassert \
   /usr/include/assert.h \
   /usr/include/c++/11/cstddef \
-  /usr/include/c++/11/fstream \
-  /usr/include/c++/11/bits/codecvt.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
-  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
-  /usr/include/c++/11/bits/fstream.tcc \
   /usr/include/c++/11/limits \
   /usr/include/c++/11/map \
   /usr/include/c++/11/bits/stl_tree.h \
@@ -3291,8 +3292,31 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardAnywhereElement.h \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardElement.h \
   antlr4cpp_generated_src/qasm3Lexer/qasm3Lexer.h \
-  antlr4cpp_generated_src/qasm3Parser/qasm3Parser.h
+  ../inc/pass/ExamplePass.hpp \
+  ../inc/pass/BasePass.hpp \
+  antlr4cpp_generated_src/qasm3Parser/qasm3Parser.h \
+  antlr4cpp_generated_src/qasm3Parser/qasm3ParserBaseListener.h \
+  antlr4cpp_generated_src/qasm3Parser/qasm3ParserListener.h \
+  ../inc/rewriter.hpp \
+  ../inc/pass/ForUnrollPass.hpp \
+  ../inc/pass/PrintPass.hpp \
+  ../inc/pass/SumPass.hpp \
+  ../inc/pass/DependencyPass.hpp
 
+
+../inc/pass/DependencyPass.hpp:
+
+../inc/pass/SumPass.hpp:
+
+../inc/pass/PrintPass.hpp:
+
+../inc/rewriter.hpp:
+
+../inc/pass/BasePass.hpp:
+
+../inc/pass/ExamplePass.hpp:
+
+../inc/compiler.hpp:
 
 ../src/mcqc.cpp:
 
@@ -3767,6 +3791,8 @@ antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/atn/ATN.h:
 /usr/include/c++/11/bits/stl_tempbuf.h:
 
 /usr/include/c++/11/bits/std_function.h:
+
+../inc/pass/ForUnrollPass.hpp:
 
 antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/atn/SetTransition.h:
 

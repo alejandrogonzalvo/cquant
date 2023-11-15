@@ -90,10 +90,10 @@ antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-build: antlr4_runtime/src
 	cd /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp && /usr/bin/cmake -E touch /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-build
 
 antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-configure: antlr4_runtime/tmp/antlr4_runtime-cfgcmd.txt
-antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-configure: antlr4_runtime/tmp/antlr4_runtime-cache-.cmake
+antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-configure: antlr4_runtime/tmp/antlr4_runtime-cache-Debug.cmake
 antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-configure: antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-patch
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alejandro/projects/MCQC/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Performing configure step for 'antlr4_runtime'"
-	cd /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp && /usr/bin/cmake "-GUnix Makefiles" -C/home/alejandro/projects/MCQC/build/antlr4_runtime/tmp/antlr4_runtime-cache-.cmake /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp
+	cd /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp && /usr/bin/cmake "-GUnix Makefiles" -C/home/alejandro/projects/MCQC/build/antlr4_runtime/tmp/antlr4_runtime-cache-Debug.cmake /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp
 	cd /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp && /usr/bin/cmake -E touch /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-configure
 
 antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-download: antlr4_runtime/src/antlr4_runtime-stamp/antlr4_runtime-gitinfo.txt
