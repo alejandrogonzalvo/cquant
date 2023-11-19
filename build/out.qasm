@@ -38,4 +38,3 @@ cx a [ 0 ] , cin [ 0 ] ;
 cx cin [ 0 ] , b [ 0 ] ; 
 measure b [ 0 : 3 ] -> ans [ 0 : 3 ] ; 
 measure cout [ 0 ] -> ans [ 4 ] ; 
-
