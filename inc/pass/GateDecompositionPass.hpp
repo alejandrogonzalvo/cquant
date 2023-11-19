@@ -37,6 +37,7 @@ public:
             auto gate_qubits = gate->qubits->Identifier();
 
             auto statements = gate->scope()->statement();
+            reverse(statements.begin(), statements.end());
             for (auto statement : statements) {
                 auto statement_tokens = getTerminalNodes(statement);
                 reverse(statement_tokens.begin(), statement_tokens.end());
@@ -57,7 +58,7 @@ public:
                     rewriter.insertAfter(index, terminalNode->getText());
                 }
             }
-            
+
             rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex());
             break;
         } 
