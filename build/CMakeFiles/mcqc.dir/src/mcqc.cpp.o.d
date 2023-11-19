@@ -404,7 +404,7 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: \
  /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardAnywhereElement.h \
  /home/alejandro/projects/MCQC/build/antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardElement.h \
  /home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Lexer/qasm3Lexer.h \
- /home/alejandro/projects/MCQC/inc/pass/ExamplePass.hpp \
+ /home/alejandro/projects/MCQC/inc/pass/Passes.hpp \
  /home/alejandro/projects/MCQC/inc/pass/BasePass.hpp \
  /home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Parser/qasm3Parser.h \
  /home/alejandro/projects/MCQC/build/antlr4cpp_generated_src/qasm3Parser/qasm3ParserBaseListener.h \
@@ -413,4 +413,5 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: \
  /home/alejandro/projects/MCQC/inc/pass/ForUnrollPass.hpp \
  /home/alejandro/projects/MCQC/inc/pass/PrintPass.hpp \
  /home/alejandro/projects/MCQC/inc/pass/SumPass.hpp \
- /home/alejandro/projects/MCQC/inc/pass/DependencyPass.hpp
+ /home/alejandro/projects/MCQC/inc/pass/DependencyPass.hpp \
+ /home/alejandro/projects/MCQC/inc/pass/GateDecompositionPass.hpp

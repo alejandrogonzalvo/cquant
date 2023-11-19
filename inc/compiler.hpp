@@ -6,11 +6,7 @@
 
 #include "antlr4-runtime.h"
 #include "qasm3Lexer.h"
-#include "pass/ExamplePass.hpp"
-#include "pass/ForUnrollPass.hpp"
-#include "pass/PrintPass.hpp"
-#include "pass/SumPass.hpp"
-#include "pass/DependencyPass.hpp"
+#include "pass/Passes.hpp"
 
 using namespace std;
 using namespace antlr4;
@@ -34,6 +30,15 @@ public:
         qasm3Lexer lexer(&input);
         CommonTokenStream tokens(&lexer);
         qasm3Parser parser(&tokens);
+
+        GateDecompositionPass gate_decomposition_pass(&tokens);
+        ParseTreeWalker::DEFAULT.walk(&gate_decomposition_pass, parser.program());
+
+        input.reset();
+        input.load(gate_decomposition_pass.getText());
+        lexer.setInputStream(&input);
+        tokens.setTokenSource(&lexer);
+        parser.setTokenStream(&tokens);
 
         ForUnrollPass for_unroll_pass(&tokens);
         ParseTreeWalker::DEFAULT.walk(&for_unroll_pass, parser.program());
@@ -64,8 +69,6 @@ public:
 
         PrintPass print_pass(&tokens);
         ParseTreeWalker::DEFAULT.walk(&print_pass, parser.program());
-
-
 
         out << print_pass.getText() << endl;
         out.close();

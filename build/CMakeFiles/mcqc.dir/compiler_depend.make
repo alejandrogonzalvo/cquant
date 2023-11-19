@@ -3292,7 +3292,7 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardAnywhereElement.h \
   antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/xpath/XPathWildcardElement.h \
   antlr4cpp_generated_src/qasm3Lexer/qasm3Lexer.h \
-  ../inc/pass/ExamplePass.hpp \
+  ../inc/pass/Passes.hpp \
   ../inc/pass/BasePass.hpp \
   antlr4cpp_generated_src/qasm3Parser/qasm3Parser.h \
   antlr4cpp_generated_src/qasm3Parser/qasm3ParserBaseListener.h \
@@ -3301,7 +3301,8 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
   ../inc/pass/ForUnrollPass.hpp \
   ../inc/pass/PrintPass.hpp \
   ../inc/pass/SumPass.hpp \
-  ../inc/pass/DependencyPass.hpp
+  ../inc/pass/DependencyPass.hpp \
+  ../inc/pass/GateDecompositionPass.hpp
 
 
 ../inc/pass/DependencyPass.hpp:
@@ -3313,8 +3314,6 @@ CMakeFiles/mcqc.dir/src/mcqc.cpp.o: ../src/mcqc.cpp \
 ../inc/rewriter.hpp:
 
 ../inc/pass/BasePass.hpp:
-
-../inc/pass/ExamplePass.hpp:
 
 ../inc/compiler.hpp:
 
@@ -3343,6 +3342,8 @@ antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/pattern/ParseTree
 antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/ParseTreeWalker.h:
 
 antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/ParseTreeProperty.h:
+
+../inc/pass/GateDecompositionPass.hpp:
 
 antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/tree/TerminalNodeImpl.h:
 
@@ -3983,6 +3984,8 @@ antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/misc/InterpreterDataRe
 /usr/include/c++/11/bits/basic_string.h:
 
 /usr/include/linux/limits.h:
+
+../inc/pass/Passes.hpp:
 
 antlr4_runtime/src/antlr4_runtime/runtime/Cpp/runtime/src/atn/LexerATNConfig.h:
 
