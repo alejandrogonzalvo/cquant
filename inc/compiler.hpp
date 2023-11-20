@@ -13,64 +13,57 @@ using namespace antlr4;
 using namespace openqasm;
 using namespace tree;
 
-class compiler {
+class Compiler {
 private:
+    ANTLRInputStream input;
+    qasm3Lexer lexer;
+    CommonTokenStream tokens;
+    qasm3Parser parser;
+    string compiled_text;
+
+
+    void run_pass(BasePass* listener) {
+        input.reset();
+        input.load(compiled_text);
+        lexer.setInputStream(&input);
+        tokens.setTokenSource(&lexer);
+        parser.setTokenStream(&tokens);
+
+        ParseTreeWalker::DEFAULT.walk(listener, parser.program());
+        compiled_text = listener->getText();
+    }
 
 public:
-    compiler() = default;
-    ~compiler() = default;
+    Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {};
+    ~Compiler() = default;
 
-    
-    static void compile(const std::string& source, const std::string& output) {
-        ifstream stream;
+
+    void compile(const std::string& source, const std::string& output) {
+        fstream input_stream;
+        stringstream string_stream;
         ofstream out(output);
-        stream.open(source);
 
-        ANTLRInputStream input(stream);
-        qasm3Lexer lexer(&input);
-        CommonTokenStream tokens(&lexer);
-        qasm3Parser parser(&tokens);
+        input_stream.open(source);
+        string_stream << input_stream.rdbuf();
+        compiled_text = string_stream.str();
 
         GateDecompositionPass gate_decomposition_pass(&tokens);
-        ParseTreeWalker::DEFAULT.walk(&gate_decomposition_pass, parser.program());
-
-        input.reset();
-        input.load(gate_decomposition_pass.getText());
-        lexer.setInputStream(&input);
-        tokens.setTokenSource(&lexer);
-        parser.setTokenStream(&tokens);
+        run_pass(&gate_decomposition_pass);
 
         ForUnrollPass for_unroll_pass(&tokens);
-        ParseTreeWalker::DEFAULT.walk(&for_unroll_pass, parser.program());
-
-        input.reset();
-        input.load(for_unroll_pass.getText());
-        lexer.setInputStream(&input);
-        tokens.setTokenSource(&lexer);
-        parser.setTokenStream(&tokens);
+        run_pass(&for_unroll_pass);
 
         SumPass sum_pass(&tokens);
-        ParseTreeWalker::DEFAULT.walk(&sum_pass, parser.program());
-
-        input.reset();
-        input.load(sum_pass.getText());
-        lexer.setInputStream(&input);
-        tokens.setTokenSource(&lexer);
-        parser.setTokenStream(&tokens);
-
+        run_pass(&sum_pass);
+        
         DependencyPass dependency_pass(&tokens);
-        ParseTreeWalker::DEFAULT.walk(&dependency_pass, parser.program());
-
-        input.reset();
-        input.load(dependency_pass.getText());
-        lexer.setInputStream(&input);
-        tokens.setTokenSource(&lexer);
-        parser.setTokenStream(&tokens);
+        run_pass(&dependency_pass);
 
         PrintPass print_pass(&tokens);
-        ParseTreeWalker::DEFAULT.walk(&print_pass, parser.program());
+        run_pass(&print_pass);
 
-        out << print_pass.getText() << endl;
+        out << compiled_text;
+
         out.close();
     }
 };
