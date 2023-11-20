@@ -8,6 +8,43 @@ class GateDecompositionPass : public BasePass {
 private:
     vector<qasm3Parser::GateStatementContext*> gates;
     bool inside_gate_definition = false;
+
+    int find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit) {
+        int i = 0;
+        for (auto q : qubits) {
+            if (q->getText() == qubit) {
+                return i;
+            }
+            i++;
+        }
+        return i;
+    }
+
+    void insert_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement) {
+        auto statement_tokens = getTerminalNodes(statement);
+        reverse(statement_tokens.begin(), statement_tokens.end());
+        size_t stop_index = ctx->getStop()->getTokenIndex();
+        auto call_qubits = ctx->gateOperandList()->gateOperand();
+
+        for (auto terminalNode : statement_tokens) {
+            string text = terminalNode->getText();
+            int i = find_qubit(gate->qubits->Identifier(), text);
+            if (i != call_qubits.size()) {
+                rewriter.insertAfter(stop_index, call_qubits[i]->getText());
+                continue;
+            }
+            rewriter.insertAfter(stop_index, text);
+        }
+    }
+    
+    void replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
+        auto statements = gate->scope()->statement();
+        reverse(statements.begin(), statements.end());
+        for (auto statement : statements) {
+            insert_statement(ctx, gate, statement);
+        }
+    }
+    
 public:
     using BasePass::BasePass;
 
@@ -26,41 +63,17 @@ public:
             return;
         }
 
+        size_t start_index = ctx->getStart()->getTokenIndex();
+        size_t stop_index = ctx->getStop()->getTokenIndex();
+
         for (auto gate : gates) {
             if (gate->Identifier()->getText() != ctx->Identifier()->getText()) {
                 continue;
             }
 
-            cout << "Gate call statement: " << ctx->getText() << endl;
-
-            auto call_qubits = ctx->gateOperandList()->gateOperand();
-            auto gate_qubits = gate->qubits->Identifier();
-
-            auto statements = gate->scope()->statement();
-            reverse(statements.begin(), statements.end());
-            for (auto statement : statements) {
-                auto statement_tokens = getTerminalNodes(statement);
-                reverse(statement_tokens.begin(), statement_tokens.end());
-                size_t index = ctx->getStop()->getTokenIndex();
-
-                for (auto terminalNode : statement_tokens) {
-                    int i = 0;
-                    for (auto qubit : gate_qubits) {
-                        if (qubit->getText() == terminalNode->getText()) {
-                            break;
-                        }
-                        i++;
-                    }
-                    if (i != gate_qubits.size()) {
-                        rewriter.insertAfter(index, call_qubits[i]->getText());
-                        continue;
-                    }
-                    rewriter.insertAfter(index, terminalNode->getText());
-                }
-            }
-
-            rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex());
-            break;
-        } 
+            replace_gate_call(ctx, gate);
+            rewriter.Delete(start_index, stop_index);
+            return;
+        }
     }
 };
