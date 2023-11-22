@@ -17,7 +17,7 @@ set(error_code 1)
 set(number_of_tries 0)
 while(error_code AND number_of_tries LESS 3)
   execute_process(
-    COMMAND "/usr/bin/git"  clone --no-checkout --config "advice.detachedHead=false" "https://github.com/antlr/antlr4.git" "antlr4_runtime"
+    COMMAND "/usr/bin/git"  clone --no-checkout --config "advice.detachedHead=false" "https://github.com/alejandrogonzalvo/antlr4.git" "antlr4_runtime"
     WORKING_DIRECTORY "/home/alejandro/projects/MCQC/build/antlr4_runtime/src"
     RESULT_VARIABLE error_code
     )
@@ -28,7 +28,7 @@ if(number_of_tries GREATER 1)
           ${number_of_tries} times.")
 endif()
 if(error_code)
-  message(FATAL_ERROR "Failed to clone repository: 'https://github.com/antlr/antlr4.git'")
+  message(FATAL_ERROR "Failed to clone repository: 'https://github.com/alejandrogonzalvo/antlr4.git'")
 endif()
 
 execute_process(

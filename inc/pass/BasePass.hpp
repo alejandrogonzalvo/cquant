@@ -34,6 +34,21 @@ protected:
         return terminalNodes;
     }
 
+        void write_replace(tree::ParseTree* tree, TerminalNode* replaced_node, string text_to_replace, size_t index) {
+        auto tree_tokens = getTerminalNodes(tree);
+        reverse(tree_tokens.begin(), tree_tokens.end());
+
+        for (auto terminalNode : tree_tokens) {
+            if(terminalNode->getSymbol()->getType() == replaced_node->getSymbol()->getType()
+                && terminalNode->getText() == replaced_node->getText()) {
+                rewriter.insertAfter(index, text_to_replace);
+                continue;
+            }
+
+            rewriter.insertAfter(index, terminalNode->getText());
+        }
+    }
+
 public:
     BasePass(TokenStream *tokens) : rewriter(tokens) {}
 

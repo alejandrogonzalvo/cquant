@@ -4,6 +4,18 @@
 #include <algorithm>
 
 class ForUnrollPass : public BasePass {
+private:
+    void unroll_statement(int start_int, int end_int, int step_int, qasm3Parser::StatementContext* statement, qasm3Parser::ForStatementContext* ctx) {
+        auto statement_tokens = getTerminalNodes(statement);
+        reverse(statement_tokens.begin(), statement_tokens.end());
+        size_t index = statement->getStop()->getTokenIndex();
+        
+        for (int i = start_int; i != end_int; i+= step_int) {
+            write_replace(statement, ctx->Identifier(), to_string(i), index);
+        }
+
+        rewriter.Delete(statement->getStart()->getTokenIndex(), statement->getStop()->getTokenIndex());
+    }
 public:
     using BasePass::BasePass;
 
@@ -20,10 +32,13 @@ public:
             step = range->getRuleContext<qasm3Parser::ExpressionContext>(1)->getText();
         }
 
-        //TODO: Refactor this
-        int start_int = stoi(start);
-        int end_int = stoi(end->getText());
+        start.erase(remove(start.begin(), start.end(), ' '), start.end());
         step.erase(remove(step.begin(), step.end(), ' '), step.end());
+        string end_text = end->getText();
+        end_text.erase(remove(end_text.begin(), end_text.end(), ' '), end_text.end());
+
+        int start_int = stoi(start);
+        int end_int = stoi(end_text);
         int step_int = stoi(step);
         auto *statement_scope = ctx->statementOrScope();
         
@@ -35,22 +50,7 @@ public:
         }
 
         for (auto statement : statements) {
-            for (int i = start_int; i != end_int; i+= step_int) {
-                auto statement_tokens = getTerminalNodes(statement);
-                reverse(statement_tokens.begin(), statement_tokens.end());
-                size_t index = statement->getStop()->getTokenIndex();
-
-                for (auto terminalNode : statement_tokens) {
-                    if(terminalNode->getSymbol()->getType() == qasm3Parser::Identifier
-                        && terminalNode->getText() == ctx->Identifier()->getText()) {
-                        rewriter.insertAfter(index, to_string(i));
-                        continue;
-                    }
-
-                    rewriter.insertAfter(index, terminalNode->getText());
-                }                   
-            }
-            rewriter.Delete(statement->getStart()->getTokenIndex(), statement->getStop()->getTokenIndex());
+            unroll_statement(start_int, end_int, step_int, statement, ctx);
         }
 
         rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->statementOrScope()->getStart()->getTokenIndex());
