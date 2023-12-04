@@ -1,6 +1,0 @@
-/home/alejandro/projects/MCQC/build/CMakeFiles/antlr4_runtime.dir
-/home/alejandro/projects/MCQC/build/CMakeFiles/antlr4_runtime-build_static.dir
-/home/alejandro/projects/MCQC/build/CMakeFiles/antlr4_runtime-build_shared.dir
-/home/alejandro/projects/MCQC/build/CMakeFiles/mcqc.dir
-/home/alejandro/projects/MCQC/build/CMakeFiles/edit_cache.dir
-/home/alejandro/projects/MCQC/build/CMakeFiles/rebuild_cache.dir

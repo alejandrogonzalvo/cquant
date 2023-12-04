@@ -42,7 +42,12 @@ include_directories(${ANTLR_OpenQASMParser_OUTPUT_DIR})
 #         ${ANTLR_DIR}/openqasm_reference_parser/qasm3ParserVisitor.cpp
 #         )
 
+file(GLOB PASS_SOURCES
+    "src/pass/*.cpp"
+)
+
 add_executable(mcqc src/mcqc.cpp
+    ${PASS_SOURCES}
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )

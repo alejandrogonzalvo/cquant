@@ -3,16 +3,11 @@
 #include "pass/BasePass.hpp"
 
 class PrintPass : public BasePass {
+private:
+    bool is_endline_token(size_t token_type);
+
 public:
     using BasePass::BasePass;
-
-    void enterProgram(qasm3Parser::ProgramContext *ctx) override {\
-        for (auto terminal_node : getTerminalNodes(ctx)) {
-            if(terminal_node->getSymbol()->getType() == qasm3Parser::SEMICOLON
-                || terminal_node->getSymbol()->getType() == qasm3Parser::LBRACE
-                || terminal_node->getSymbol()->getType() == qasm3Parser::RBRACE) {
-                rewriter.insertAfter(terminal_node->getSymbol()->getTokenIndex(), "\n");
-            }
-        }
-    }
+    
+    void enterProgram(qasm3Parser::ProgramContext *ctx) override;
 };
