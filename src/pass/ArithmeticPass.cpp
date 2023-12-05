@@ -2,7 +2,7 @@
 #include <cmath>
 
 
-int ArithmeticPass::convertLiteralExpression(Token* token) {
+float ArithmeticPass::convertLiteralExpression(Token* token) {
     size_t type = token->getType();
     if (type == qasm3Parser::DecimalIntegerLiteral) {
         return stoi(token->getText());
@@ -24,7 +24,7 @@ int ArithmeticPass::convertLiteralExpression(Token* token) {
     }
 }
 
-int ArithmeticPass::applyOperation(int left_side, int right_side, Token* operation) {
+float ArithmeticPass::applyOperation(float left_side, float right_side, Token* operation) {
     size_t op_type = operation->getType();
     if (op_type == qasm3Parser::PLUS) {
         return left_side + right_side;
@@ -35,7 +35,7 @@ int ArithmeticPass::applyOperation(int left_side, int right_side, Token* operati
     } else if (op_type == qasm3Parser::SLASH) {
         return left_side / right_side;
     } else if (op_type == qasm3Parser::PERCENT) {
-        return left_side % right_side;
+        return int(left_side) % int(right_side);
     } else if (op_type == qasm3Parser::DOUBLE_ASTERISK) {
         return pow(left_side, right_side);
     } else {
@@ -43,7 +43,7 @@ int ArithmeticPass::applyOperation(int left_side, int right_side, Token* operati
     }
 }
 
-optional<int> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionContext* left_side, qasm3Parser::ExpressionContext* right_side, Token* operation) {
+optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionContext* left_side, qasm3Parser::ExpressionContext* right_side, Token* operation) {
     if (left_side->children.size() != 1) {
         return nullopt;
     }
@@ -56,28 +56,27 @@ optional<int> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionContext
     TerminalNode *right_side_terminal = dynamic_cast<TerminalNode*>(right_side->children[0]);
 
     size_t left_side_type = left_side_terminal->getSymbol()->getType();
-    int left_side_int;
+    float left_side_float;
     if (left_side_type == qasm3Parser::Identifier || left_side_type == qasm3Parser::HardwareQubit) {
         return nullopt;
     }
     else {
-        left_side_int = convertLiteralExpression(left_side_terminal->getSymbol());
+        left_side_float = convertLiteralExpression(left_side_terminal->getSymbol());
     }
 
     size_t right_side_type = right_side_terminal->getSymbol()->getType();
-    int right_side_int;
+    float right_side_float;
 
     if (right_side_type == qasm3Parser::Identifier) {
         return nullopt;
     }
 
     else {
-        right_side_int = convertLiteralExpression(right_side_terminal->getSymbol());
+        right_side_float = convertLiteralExpression(right_side_terminal->getSymbol());
     }
 
 
-    int result = 0;
-    return applyOperation(left_side_int, right_side_int, operation);    
+    return applyOperation(left_side_float, right_side_float, operation);    
 }
 
 // void ArithmeticPass::enterProgram(qasm3Parser::ProgramContext *ctx) {
@@ -98,7 +97,7 @@ void ArithmeticPass::enterAdditiveExpression(qasm3Parser::AdditiveExpressionCont
     auto right_side = ctx->expression(1);
     Token* operation = ctx->op;
 
-    optional<int> result = arithmeticOperation(left_side, right_side, operation);
+    optional<float> result = arithmeticOperation(left_side, right_side, operation);
     if (not result.has_value()) {
         return;
     }
@@ -111,7 +110,7 @@ void ArithmeticPass::enterMultiplicativeExpression(qasm3Parser::MultiplicativeEx
     auto right_side = ctx->expression(1);
     Token* operation = ctx->op;
 
-    optional<int> result = arithmeticOperation(left_side, right_side, operation);
+    optional<float> result = arithmeticOperation(left_side, right_side, operation);
     if (not result.has_value()) {
         return;
     }

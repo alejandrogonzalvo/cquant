@@ -5,9 +5,9 @@
 
 class ArithmeticPass : public BasePass {
 private:
-    optional<int> arithmeticOperation(qasm3Parser::ExpressionContext* left_side, qasm3Parser::ExpressionContext* right_side, Token* operation);
-    int convertLiteralExpression(Token* token);
-    int applyOperation(int left_side, int right_side, Token* operation);
+    optional<float> arithmeticOperation(qasm3Parser::ExpressionContext* left_side, qasm3Parser::ExpressionContext* right_side, Token* operation);
+    float convertLiteralExpression(Token* token);
+    float applyOperation(float left_side, float right_side, Token* operation);
 public:
     using BasePass::BasePass;
 
