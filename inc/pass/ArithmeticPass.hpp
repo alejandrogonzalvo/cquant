@@ -15,6 +15,7 @@ public:
 
     void enterAdditiveExpression(qasm3Parser::AdditiveExpressionContext *ctx) override;
     void enterMultiplicativeExpression(qasm3Parser::MultiplicativeExpressionContext *ctx) override;
+    void enterPowerExpression(qasm3Parser::PowerExpressionContext *ctx) override;
 
     int operations = 0;
 };

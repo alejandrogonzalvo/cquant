@@ -7,7 +7,7 @@ x q[0];
 x q[2];
 barrier q;
 h q[0];
-cphase(pi + 2 / 3 + 5) q[1], q[0];
+cphase(pi + 2 / 3 + 5%2) q[1], q[0];
 h q[1];
 cphase(pi / 4) q[2], q[0];
 cphase(pi / 2) q[2], q[1];

@@ -124,3 +124,16 @@ void ArithmeticPass::enterMultiplicativeExpression(qasm3Parser::MultiplicativeEx
 
     rewriter.replace(left_side->getStart()->getTokenIndex(), right_side->getStop()->getTokenIndex(), to_string(result.value()));
 }
+
+void ArithmeticPass::enterPowerExpression(qasm3Parser::PowerExpressionContext *ctx) {
+    auto left_side = ctx->expression(0);
+    auto right_side = ctx->expression(1);
+    Token* operation = ctx->op;
+
+    optional<float> result = arithmeticOperation(left_side, right_side, operation);
+    if (not result.has_value()) {
+        return;
+    }
+
+    rewriter.replace(left_side->getStart()->getTokenIndex(), right_side->getStop()->getTokenIndex(), to_string(result.value()));
+}
