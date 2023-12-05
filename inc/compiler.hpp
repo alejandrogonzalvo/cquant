@@ -20,6 +20,7 @@ private:
     CommonTokenStream tokens;
     qasm3Parser parser;
     string compiled_text;
+    ofstream output_stream;
 
 
     void run_pass(BasePass* listener) {
@@ -34,16 +35,18 @@ private:
     }
 
 public:
-    Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {};
+    Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {
+        compiled_text.reserve(1048576*100);
+    };
     ~Compiler() = default;
 
 
     void compile(const std::string& source, const std::string& output) {
         fstream input_stream;
         stringstream string_stream;
-        ofstream out(output);
 
         input_stream.open(source);
+        output_stream.open(output);
         string_stream << input_stream.rdbuf();
         compiled_text = string_stream.str();
 
@@ -71,8 +74,7 @@ public:
         PrintPass print_pass(&tokens);
         run_pass(&print_pass);
 
-        out << compiled_text;
-
-        out.close();
+        output_stream << compiled_text;
+        output_stream.close();
     }
 };

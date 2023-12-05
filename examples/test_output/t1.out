@@ -1,0 +1,178 @@
+include "stdgates.inc" ; 
+duration stride = 1us ; 
+const int [ 32 ] points = 4 ; 
+const int [ 32 ] shots = 4 ; 
+int [ 32 ] counts0 ; 
+int [ 32 ] counts1 = 0 ; 
+extern tabulate ( int [ 32 ] , int [ 32 ] , int [ 32 ] ) ; 
+bit c0 ; 
+bit c1 ; 
+defcalgrammar "openpulse" ; 
+defcal x q { 
+      
+   play drive(q), gaussian(100, 30, 5);
+       } 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 3 * stride ] $0 ; 
+delay [ 3 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 3 * stride ] $0 ; 
+delay [ 3 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 3 * stride ] $0 ; 
+delay [ 3 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+tabulate ( counts0 , 4 , 3 ) ; 
+tabulate ( counts1 , 4 , 3 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 2 * stride ] $0 ; 
+delay [ 2 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 2 * stride ] $0 ; 
+delay [ 2 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 2 * stride ] $0 ; 
+delay [ 2 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+tabulate ( counts0 , 4 , 2 ) ; 
+tabulate ( counts1 , 4 , 2 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 1 * stride ] $0 ; 
+delay [ 1 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 1 * stride ] $0 ; 
+delay [ 1 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 1 * stride ] $0 ; 
+delay [ 1 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+tabulate ( counts0 , 4 , 1 ) ; 
+tabulate ( counts1 , 4 , 1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 0 * stride ] $0 ; 
+delay [ 0 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 0 * stride ] $0 ; 
+delay [ 0 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+reset $0 ; 
+reset $1 ; 
+x $0 ; 
+x $1 ; 
+delay [ 0 * stride ] $0 ; 
+delay [ 0 * durationof ( { 
+x $1 ; 
+} 
+) ] ; 
+c0 = measure $0 ; 
+c1 = measure $1 ; 
+counts0 += int [ 1 ] ( c0 ) ; 
+counts1 += int [ 1 ] ( c1 ) ; 
+tabulate ( counts0 , 4 , 0 ) ; 
+tabulate ( counts1 , 4 , 0 ) ; 

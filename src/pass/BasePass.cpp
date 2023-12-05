@@ -37,3 +37,10 @@ string BasePass::getText() {
     return rewriter.getText(Rewriter::DEFAULT_PROGRAM_NAME, misc::Interval(0UL, rewriter.getTokenStream()->size() - 1));
 }
 
+string BasePass::getText(size_t position) {
+    return rewriter.getText(Rewriter::DEFAULT_PROGRAM_NAME, misc::Interval(position, position));
+}
+
+string BasePass::getText(size_t initial_position, size_t final_position) {
+    return rewriter.getText(Rewriter::DEFAULT_PROGRAM_NAME, misc::Interval(initial_position, final_position));
+}
