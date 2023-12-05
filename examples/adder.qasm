@@ -33,8 +33,10 @@ reset cout;
 
 // set input states
 for uint i in [0: 3] {
+for uint j in [0: 3] {
   if(bool(a_in[i])) x a[i];
   if(bool(b_in[i])) x b[i];
+}
 }
 // add a to b, storing result in b
 majority cin[0], b[0], a[0];
