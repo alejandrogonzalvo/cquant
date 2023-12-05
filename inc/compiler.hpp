@@ -66,8 +66,14 @@ public:
             }
         }
 
-        ArithmeticPass sum_pass(&tokens);
-        run_pass(&sum_pass);
+        while (true) {
+            ArithmeticPass sum_pass(&tokens);
+            run_pass(&sum_pass);
+
+            if (sum_pass.operations == 0) {
+                break;
+            }
+        }
         
         DependencyPass dependency_pass(&tokens);
         run_pass(&dependency_pass);

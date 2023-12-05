@@ -1,6 +1,10 @@
 #include "pass/ArithmeticPass.hpp"
 #include <cmath>
 
+bool isArithmeticSymbol(Token* token) {
+    size_t type = token->getType();
+    return type == qasm3Parser::PLUS || type == qasm3Parser::MINUS || type == qasm3Parser::ASTERISK || type == qasm3Parser::SLASH || type == qasm3Parser::PERCENT || type == qasm3Parser::DOUBLE_ASTERISK;
+}
 
 float ArithmeticPass::convertLiteralExpression(Token* token) {
     size_t type = token->getType();
@@ -44,19 +48,22 @@ float ArithmeticPass::applyOperation(float left_side, float right_side, Token* o
 }
 
 optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionContext* left_side, qasm3Parser::ExpressionContext* right_side, Token* operation) {
+
     if (left_side->children.size() != 1) {
         return nullopt;
     }
 
-    if (right_side->children.size() != 1) {
+    else if (right_side->children.size() != 1) {
         return nullopt;
     }
 
+    float left_side_float;
+    float right_side_float;
+    
     TerminalNode *left_side_terminal = dynamic_cast<TerminalNode*>(left_side->children[0]);
     TerminalNode *right_side_terminal = dynamic_cast<TerminalNode*>(right_side->children[0]);
 
     size_t left_side_type = left_side_terminal->getSymbol()->getType();
-    float left_side_float;
     if (left_side_type == qasm3Parser::Identifier || left_side_type == qasm3Parser::HardwareQubit) {
         return nullopt;
     }
@@ -65,7 +72,6 @@ optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionConte
     }
 
     size_t right_side_type = right_side_terminal->getSymbol()->getType();
-    float right_side_float;
 
     if (right_side_type == qasm3Parser::Identifier) {
         return nullopt;
@@ -76,6 +82,7 @@ optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionConte
     }
 
 
+    operations++;
     return applyOperation(left_side_float, right_side_float, operation);    
 }
 
