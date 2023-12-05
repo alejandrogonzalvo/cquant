@@ -23,7 +23,6 @@ void BasePass::write_replace(tree::ParseTree* tree, TerminalNode* replaced_node,
     reverse(tree_tokens.begin(), tree_tokens.end());
 
     for (auto terminalNode : tree_tokens) {
-        cout << terminalNode->getText();
         if(terminalNode->getSymbol()->getText() == replaced_node->getSymbol()->getText()
             && terminalNode->getSymbol()->getType() == replaced_node->getSymbol()->getType()) {
             rewriter.insertAfter(index, text_to_replace);

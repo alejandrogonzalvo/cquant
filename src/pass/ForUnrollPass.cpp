@@ -1,20 +1,28 @@
 #include "pass/ForUnrollPass.hpp"
 
 // PRIVATE CLASS METHODS
-void ForUnrollPass::unroll_statement(int start_int, int end_int, int step_int, qasm3Parser::StatementContext* statement, qasm3Parser::ForStatementContext* ctx) {
-    auto statement_tokens = getTerminalNodes(statement);
-    reverse(statement_tokens.begin(), statement_tokens.end());
-    size_t index = statement->getStop()->getTokenIndex();
-    
+void ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int, vector<qasm3Parser::StatementContext*> statements, qasm3Parser::ForStatementContext* ctx) {
+    size_t start_index = statements.front()->getStart()->getTokenIndex();
+    size_t stop_index = statements.back()->getStop()->getTokenIndex();
+    reverse(statements.begin(), statements.end());
     for (int i = start_int; i != end_int; i+= step_int) {
-        write_replace(statement, ctx->Identifier(), to_string(i), index);
-    }
-
-    rewriter.Delete(statement->getStart()->getTokenIndex(), statement->getStop()->getTokenIndex());
+        for (auto statement : statements) {            
+            write_replace(statement, ctx->Identifier(), to_string(i), stop_index);
+        }
+    }        
+    
+    rewriter.Delete(start_index, stop_index);
 }
 
 // PUBLIC CLASS METHODS
 void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
+    if (inside_for_statement) {
+        recursive_for_statement = true;
+        return;
+    }
+
+    inside_for_statement = true;
+
     auto range = ctx->rangeExpression();
     string start = range->getRuleContext<qasm3Parser::ExpressionContext>(0)->getText();
     auto end = range->getRuleContext<qasm3Parser::ExpressionContext>(2);
@@ -44,10 +52,12 @@ void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
         statements = statement_scope->scope()->statement();
     }
 
-    for (auto statement : statements) {
-        unroll_statement(start_int, end_int, step_int, statement, ctx);
-    }
+    unroll_statements(start_int, end_int, step_int, statements, ctx);
 
     rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->statementOrScope()->getStart()->getTokenIndex());
     rewriter.Delete(ctx->statementOrScope()->getStop()->getTokenIndex());
+}
+
+void ForUnrollPass::exitForStatement(qasm3Parser::ForStatementContext *ctx) {
+    inside_for_statement = false;
 }

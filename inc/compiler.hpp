@@ -47,11 +47,20 @@ public:
         string_stream << input_stream.rdbuf();
         compiled_text = string_stream.str();
 
+        ConstantPropagationPass constant_propagation_pass(&tokens);
+        run_pass(&constant_propagation_pass);
+
         GateDecompositionPass gate_decomposition_pass(&tokens);
         run_pass(&gate_decomposition_pass);
 
-        ForUnrollPass for_unroll_pass(&tokens);
-        run_pass(&for_unroll_pass);
+        while (true) {
+            ForUnrollPass for_unroll_pass(&tokens);
+            run_pass(&for_unroll_pass);
+
+            if (!for_unroll_pass.recursive_for_statement) {
+                break;
+            }
+        }
 
         SumPass sum_pass(&tokens);
         run_pass(&sum_pass);
