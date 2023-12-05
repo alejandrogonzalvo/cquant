@@ -6,7 +6,7 @@
 class ForUnrollPass : public BasePass {
 private:
     void unroll_statements(int start_int, int end_int, int step_int, vector<qasm3Parser::StatementContext*> statement, qasm3Parser::ForStatementContext* ctx);
-    bool inside_for_statement = false;
+    int inside_for_statement = 0;
 public:
     using BasePass::BasePass;
 

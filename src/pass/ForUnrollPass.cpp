@@ -18,10 +18,11 @@ void ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int, 
 void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
     if (inside_for_statement) {
         recursive_for_statement = true;
+        inside_for_statement++;
         return;
     }
 
-    inside_for_statement = true;
+    inside_for_statement++;
 
     auto range = ctx->rangeExpression();
     string start = range->getRuleContext<qasm3Parser::ExpressionContext>(0)->getText();
@@ -59,5 +60,5 @@ void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
 }
 
 void ForUnrollPass::exitForStatement(qasm3Parser::ForStatementContext *ctx) {
-    inside_for_statement = false;
+    inside_for_statement--;
 }
