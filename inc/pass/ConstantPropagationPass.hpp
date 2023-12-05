@@ -4,7 +4,7 @@
 
 class ConstantPropagationPass : public BasePass {
 public:
-    using BasePass::BasePass;
+    ConstantPropagationPass(TokenStream *tokens) : BasePass(tokens) {}
 
     map<Token*, string> const_map;
 
