@@ -57,6 +57,7 @@ public:
         run_pass(&gate_decomposition_pass);
 
         while (true) {
+            // TODO: Solve Memory Leak with long rewrite Operations
             ForUnrollPass for_unroll_pass(&tokens);
             run_pass(&for_unroll_pass);
 
@@ -65,7 +66,7 @@ public:
             }
         }
 
-        SumPass sum_pass(&tokens);
+        ArithmeticPass sum_pass(&tokens);
         run_pass(&sum_pass);
         
         DependencyPass dependency_pass(&tokens);
