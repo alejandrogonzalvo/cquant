@@ -78,6 +78,9 @@ public:
         DependencyPass dependency_pass(&tokens);
         run_pass(&dependency_pass);
 
+        PhysicalMappingPass physical_mapping_pass(&tokens);
+        run_pass(&physical_mapping_pass);
+
         PrintPass print_pass(&tokens);
         run_pass(&print_pass);
 

@@ -7,3 +7,4 @@
 #include "pass/DependencyPass.hpp"
 #include "pass/GateDecompositionPass.hpp"
 #include "pass/ConstantPropagationPass.hpp"
+#include "pass/PhysicalMappingPass.hpp"

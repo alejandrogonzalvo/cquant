@@ -7,7 +7,7 @@ public:
     using BasePass::BasePass;
 
     bool inside_gate_declaration = false;
-    map <string, set<string>> qubit_map;
+    map<string, set<string>> qubit_map;
 
     void enterGateStatement(qasm3Parser::GateStatementContext *ctx) override;
     void exitGateStatement(qasm3Parser::GateStatementContext *ctx) override;
