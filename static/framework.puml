@@ -1,0 +1,33 @@
+@startuml Framework
+
+component [Qiskit Python File]
+package MCQC {
+    component [Logical OpenQASM3]
+    component [Visualization Pass1]
+    component [Mapping Pass]
+    component [Visualization Pass2]
+    component [Target Code Generator]
+    component [Physical OpenQASM3]
+}
+
+component [QuNet Python File]
+component [JSON Architecture file]
+component Netsquid
+component [Visualization of logical circuit]
+component [Visualization of physical circuit]
+
+
+[Qiskit Python File] -down-> [Logical OpenQASM3]
+[Logical OpenQASM3] -down-> [Visualization Pass1]
+[Visualization Pass1] -left-> [Visualization of logical circuit]
+[Logical OpenQASM3] -down-> [Mapping Pass]
+[Mapping Pass] -down-> [Physical OpenQASM3]
+[Physical OpenQASM3] -left-> [Visualization Pass2]
+[Visualization Pass2] -left-> [Visualization of physical circuit]
+[QuNet Python File] -down-> [JSON Architecture file]
+[JSON Architecture file] -down-> [Mapping Pass]
+[Physical OpenQASM3] -down-> [Target Code Generator]
+[Target Code Generator] -down-> Netsquid
+
+
+@enduml
