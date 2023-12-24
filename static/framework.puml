@@ -25,7 +25,7 @@ component [Visualization of physical circuit]
 [Physical OpenQASM3] -left-> [Visualization Pass2]
 [Visualization Pass2] -left-> [Visualization of physical circuit]
 [QuNet Python File] -down-> [JSON Architecture file]
-[JSON Architecture file] -down-> [Mapping Pass]
+[JSON Architecture file] -left-> [Mapping Pass]
 [Physical OpenQASM3] -down-> [Target Code Generator]
 [Target Code Generator] -down-> Netsquid
 
