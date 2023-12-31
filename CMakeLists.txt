@@ -1,5 +1,7 @@
 project(mcqc)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake-modules")
+
 # minimum required CMAKE version
 CMAKE_MINIMUM_REQUIRED(VERSION 3.7 FATAL_ERROR)
 
@@ -33,18 +35,11 @@ include_directories(${ANTLR_OpenQASMLexer_OUTPUT_DIR})
 include_directories(${ANTLR_OpenQASMParser_OUTPUT_DIR})
 
 
-# add_library(openqasm_reference_parser STATIC
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3Lexer.cpp
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3Parser.cpp
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3ParserBaseListener.cpp
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3ParserBaseVisitor.cpp
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3ParserListener.cpp
-#         ${ANTLR_DIR}/openqasm_reference_parser/qasm3ParserVisitor.cpp
-#         )
+# Find JSONCPP library on local system.
+# You can download it using apt install nlohmann-json3-dev
+find_package(nlohmann_json 3.2.0 REQUIRED)
 
-file(GLOB PASS_SOURCES
-    "src/pass/*.cpp"
-)
+file(GLOB PASS_SOURCES "src/pass/*.cpp")
 
 add_executable(mcqc src/mcqc.cpp
     ${PASS_SOURCES}
@@ -52,12 +47,7 @@ add_executable(mcqc src/mcqc.cpp
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
 
-target_compile_options(mcqc PUBLIC
--g3
-)
+target_compile_options(mcqc PUBLIC -g3)
+target_compile_options(antlr4_static INTERFACE -g3)
 
-target_compile_options(antlr4_static INTERFACE
--g3
-)
-
-target_link_libraries(mcqc antlr4_static)
+target_link_libraries(mcqc antlr4_static nlohmann_json::nlohmann_json)
