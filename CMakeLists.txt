@@ -1,4 +1,4 @@
-project(mcqc)
+project(cquant)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake-modules")
 
@@ -41,13 +41,13 @@ find_package(nlohmann_json 3.2.0 REQUIRED)
 
 file(GLOB PASS_SOURCES "src/pass/*.cpp")
 
-add_executable(mcqc src/mcqc.cpp
+add_executable(cquant src/cquant.cpp
     ${PASS_SOURCES}
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
 
-target_compile_options(mcqc PUBLIC -g3)
+target_compile_options(cquant PUBLIC -g3)
 target_compile_options(antlr4_static INTERFACE -g3)
 
-target_link_libraries(mcqc antlr4_static nlohmann_json::nlohmann_json)
+target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json)

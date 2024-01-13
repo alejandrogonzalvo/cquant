@@ -10,7 +10,7 @@ int main(int argc, const char* argv[]) {
     Compiler compiler;
 
     if (argc < 2 || argc > 3) {
-        cout << "Usage: mcqc <filename> [output]" << endl;
+        cout << "Usage: cquant <filename> [output]" << endl;
         return 1;
     }
 

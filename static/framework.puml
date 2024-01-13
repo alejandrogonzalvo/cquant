@@ -1,7 +1,7 @@
 @startuml Framework
 
 component [Qiskit Python File]
-package MCQC {
+package cquant {
     component [Logical OpenQASM3]
     component [Visualization Pass1]
     component [Mapping Pass]
