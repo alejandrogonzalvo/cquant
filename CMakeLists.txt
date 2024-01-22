@@ -40,9 +40,11 @@ include_directories(${ANTLR_OpenQASMParser_OUTPUT_DIR})
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
 file(GLOB PASS_SOURCES "src/pass/*.cpp")
+file(GLOB WRAPPER_SOURCES "src/python_wrapper/*.cpp")
 
 add_executable(cquant src/cquant.cpp src/compiler.cpp
     ${PASS_SOURCES}
+    ${WRAPPER_SOURCES}
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
