@@ -8,4 +8,4 @@
 #include "pass/GateDecompositionPass.hpp"
 #include "pass/ConstantPropagationPass.hpp"
 #include "pass/PhysicalMappingPass.hpp"
-#include "pass/PhysicalPass.hpp"
+#include "pass/MappingPass.hpp"

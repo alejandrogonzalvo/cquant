@@ -78,14 +78,14 @@ public:
         DependencyPass dependency_pass(&tokens);
         run_pass(&dependency_pass);
 
-        PhysicalMappingPass physical_mapping_pass(&tokens);
-        run_pass(&physical_mapping_pass);
+        // PhysicalMappingPass physical_mapping_pass(&tokens);
+        // run_pass(&physical_mapping_pass);
+
+        MappingPass physical_pass(&tokens, "../examples/architecture_files/2Dgrid.json");
+        run_pass(&physical_pass);
 
         PrintPass print_pass(&tokens);
         run_pass(&print_pass);
-
-        PhysicalPass physical_pass(&tokens, "../examples/architecture_files/2Dgrid.json");
-        run_pass(&physical_pass);
 
         output_stream << compiled_text;
         output_stream.close();
