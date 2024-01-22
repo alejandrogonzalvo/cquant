@@ -41,7 +41,7 @@ find_package(nlohmann_json 3.2.0 REQUIRED)
 
 file(GLOB PASS_SOURCES "src/pass/*.cpp")
 
-add_executable(cquant src/cquant.cpp
+add_executable(cquant src/cquant.cpp src/compiler.cpp
     ${PASS_SOURCES}
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
@@ -50,4 +50,4 @@ add_executable(cquant src/cquant.cpp
 target_compile_options(cquant PUBLIC -g3)
 target_compile_options(antlr4_static INTERFACE -g3)
 
-target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json)
+target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json python3.10)
