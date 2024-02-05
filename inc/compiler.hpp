@@ -15,10 +15,11 @@ using namespace tree;
 
 class Compiler {
 private:
-    ANTLRInputStream input;
     qasm3Lexer lexer;
-    CommonTokenStream tokens;
     qasm3Parser parser;
+
+    ANTLRInputStream input;
+    CommonTokenStream tokens;
     string compiled_text;
     ofstream output_stream;
 

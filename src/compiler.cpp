@@ -51,6 +51,9 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     MappingPass physical_pass(&tokens, "../examples/architecture_files/2Dgrid.json");
     run_pass(&physical_pass);
 
+    CalibrationPass calibration_pass(&tokens);
+    run_pass(&calibration_pass);
+
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);
 

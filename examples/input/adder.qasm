@@ -4,6 +4,20 @@
  */
 include "stdgates.inc";
 
+defcalgrammar "netsquid";
+
+defcal rx(a) q {
+    // Syntax for netsquid rx gate
+}
+
+defcal ry(a) q {
+    // Syntax for netsquid ry gate
+}
+
+defcal rz(a) q {
+    // Syntax for netsquid rz gate
+}
+
 gate majority a, b, c {
     cx c, b;
     cx c, a;

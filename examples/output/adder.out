@@ -1,4 +1,17 @@
 include "stdgates.inc" ; 
+defcalgrammar "netsquid" ; 
+defcal rx ( a ) q { 
+        
+    // Syntax for netsquid rx gate
+         } 
+defcal ry ( a ) q { 
+        
+    // Syntax for netsquid ry gate
+         } 
+defcal rz ( a ) q { 
+        
+    // Syntax for netsquid rz gate
+         } 
 qubit [ 1 ] cin ; 
 qubit [ 4 ] a ; 
 qubit [ 4 ] b ; 
