@@ -54,6 +54,22 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     CalibrationPass calibration_pass(&tokens);
     run_pass(&calibration_pass);
 
+    OperationGraphPass operation_graph_pass(&tokens);
+    run_pass(&operation_graph_pass);
+
+    string operations = "";
+    for (auto operation : operation_graph_pass.operations) {
+        operations += operation.gate;
+        for (auto qubit : operation.qubits) {
+            operations += "," + to_string(qubit);
+        }
+        operations += ";";
+    }
+
+    vector<string> args = {operations};
+    PythonWrapper::run_file("../examples/python_files/mapping_algorithm/cquant_test.py", args);
+
+    cout << "Still alive" << endl;
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);
 

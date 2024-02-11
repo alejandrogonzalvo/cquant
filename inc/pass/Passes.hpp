@@ -10,3 +10,4 @@
 #include "pass/PhysicalMappingPass.hpp"
 #include "pass/MappingPass.hpp"
 #include "pass/CalibrationPass.hpp"
+#include "pass/OperationGraphPass.hpp"

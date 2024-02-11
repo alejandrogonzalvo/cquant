@@ -7,6 +7,7 @@
 #include "antlr4-runtime.h"
 #include "qasm3Lexer.h"
 #include "pass/Passes.hpp"
+#include "python_wrapper/PythonWrapper.hpp"
 
 using namespace std;
 using namespace antlr4;
