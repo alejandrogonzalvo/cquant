@@ -7,7 +7,6 @@ void GateDecompositionPass::enterGateStatement(qasm3Parser::GateStatementContext
 
 void GateDecompositionPass::exitGateStatement(qasm3Parser::GateStatementContext *ctx) {
     inside_gate_definition = false;
-    rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex());
 }
 
 void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatementContext *ctx) {
@@ -25,7 +24,18 @@ void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatemen
 
         replace_gate_call(ctx, gate);
         rewriter.Delete(start_index, stop_index);
+        replacements++;
         return;
+    }
+}
+
+void GateDecompositionPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
+    if (replacements) {
+        return;
+    }
+
+    for (const auto& ctx : gates) {
+        rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex());
     }
 }
 

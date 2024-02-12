@@ -23,8 +23,13 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     ConstantPropagationPass constant_propagation_pass(&tokens);
     run_pass(&constant_propagation_pass);
 
-    GateDecompositionPass gate_decomposition_pass(&tokens);
-    run_pass(&gate_decomposition_pass);
+    while (true) {
+        GateDecompositionPass gate_decomposition_pass(&tokens);
+        run_pass(&gate_decomposition_pass);
+
+        if (!gate_decomposition_pass.replacements) break;
+    }
+
 
     while (true) {
         // TODO: Solve Memory Leak with long rewrite Operations
@@ -70,7 +75,6 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     vector<string> args = {operations};
     PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
 
-    cout << "Still alive" << endl;
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);
 

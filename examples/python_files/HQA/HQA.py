@@ -35,7 +35,7 @@ def validate_partition(G, P, inf=2**16):
     
     return True
 
-def count_non_local_comms(Ps, distance_matrix=None):
+def count_non_local_comms(Ps, N, distance_matrix=None):
     if distance_matrix == None:
         distance_matrix = [[1 if j != i else 0 for j in range(N)] for i in range(N)]
 

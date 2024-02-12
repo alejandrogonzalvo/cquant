@@ -16,7 +16,11 @@ private:
 public:
     using BasePass::BasePass;
 
+    int replacements = 0;
+
+
     void enterGateStatement(qasm3Parser::GateStatementContext *ctx) override;
     void exitGateStatement(qasm3Parser::GateStatementContext *ctx) override;
     void enterGateCallStatement(qasm3Parser::GateCallStatementContext *ctx) override;
+    void exitProgram(qasm3Parser::ProgramContext *ctx) override;
 };

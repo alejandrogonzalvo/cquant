@@ -1,17 +1,17 @@
 include "stdgates.inc" ; 
 defcalgrammar "netsquid" ; 
 defcal rx ( a ) q { 
-         
+           
     // Syntax for netsquid rx gate
-          } 
+            } 
 defcal ry ( a ) q { 
-         
+           
     // Syntax for netsquid ry gate
-          } 
+            } 
 defcal rz ( a ) q { 
-         
+           
     // Syntax for netsquid rz gate
-          } 
+            } 
 qubit [ 1 ] cin ; 
 qubit [ 4 ] a ; 
 qubit [ 4 ] b ; 
@@ -31,14 +31,104 @@ if ( bool ( a_in [ 0 ] ) ) x $8 ;
 if ( bool ( b_in [ 0 ] ) ) x $9 ; 
 cx $8 , $9 ; 
 cx $8 , $10 ; 
+h $8 ; 
+cx $9 , $8 ; 
+tdg $8 ; 
+cx $10 , $8 ; 
+t $8 ; 
+cx $9 , $8 ; 
+tdg $8 ; 
+cx $10 , $8 ; 
+t $9 ; 
+t $8 ; 
+cx $10 , $9 ; 
+h $8 ; 
+t $10 ; 
+tdg $9 ; 
+cx $10 , $9 ; 
 cx $11 , $12 ; 
 cx $11 , $6 ; 
+h $11 ; 
+cx $12 , $11 ; 
+tdg $11 ; 
+cx $6 , $11 ; 
+t $11 ; 
+cx $12 , $11 ; 
+tdg $11 ; 
+cx $6 , $11 ; 
+t $12 ; 
+t $11 ; 
+cx $6 , $12 ; 
+h $11 ; 
+t $6 ; 
+tdg $12 ; 
+cx $6 , $12 ; 
 cx $13 , $14 ; 
 cx $13 , $8 ; 
+h $13 ; 
+cx $14 , $13 ; 
+tdg $13 ; 
+cx $8 , $13 ; 
+t $13 ; 
+cx $14 , $13 ; 
+tdg $13 ; 
+cx $8 , $13 ; 
+t $14 ; 
+t $13 ; 
+cx $8 , $14 ; 
+h $13 ; 
+t $8 ; 
+tdg $14 ; 
+cx $8 , $14 ; 
 cx $15 , $16 ; 
+h $11 ; 
+cx $12 , $11 ; 
+tdg $11 ; 
+cx $6 , $11 ; 
+t $11 ; 
+cx $12 , $11 ; 
+tdg $11 ; 
+cx $6 , $11 ; 
+t $12 ; 
+t $11 ; 
+cx $6 , $12 ; 
+h $11 ; 
+t $6 ; 
+tdg $12 ; 
+cx $6 , $12 ; 
 cx $11 , $6 ; 
 cx $6 , $12 ; 
+h $17 ; 
+cx $18 , $17 ; 
+tdg $17 ; 
+cx $4 , $17 ; 
+t $17 ; 
+cx $18 , $17 ; 
+tdg $17 ; 
+cx $4 , $17 ; 
+t $18 ; 
+t $17 ; 
+cx $4 , $18 ; 
+h $17 ; 
+t $4 ; 
+tdg $18 ; 
+cx $4 , $18 ; 
 cx $17 , $4 ; 
 cx $4 , $18 ; 
+h $8 ; 
+cx $9 , $8 ; 
+tdg $8 ; 
+cx $10 , $8 ; 
+t $8 ; 
+cx $9 , $8 ; 
+tdg $8 ; 
+cx $10 , $8 ; 
+t $9 ; 
+t $8 ; 
+cx $10 , $9 ; 
+h $8 ; 
+t $10 ; 
+tdg $9 ; 
+cx $10 , $9 ; 
 cx $8 , $10 ; 
 cx $10 , $9 ; 

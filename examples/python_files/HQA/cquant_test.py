@@ -27,7 +27,7 @@ for i, timeslice in enumerate(interactions):
 qubits = 20
 HQA_comms = []
 Gs = sparse.COO(coords, 1, (coords[0][-1]+1, qubits, qubits))
-cores = [10]
+cores = [4]
 
 for N in cores:
     part = [i for i in range(N) for _ in range(int(qubits/N))]
@@ -43,6 +43,6 @@ for N in cores:
     Ps_HQA = HQA(Gs, Ps.copy(), N, qubits, qubits, distance_matrix=all_to_all_topology)
 
     print(Ps_HQA)
-    non_local_comunications = sum(count_non_local_comms(Ps_HQA[1:], distance_matrix=all_to_all_topology))
+    non_local_comunications = sum(count_non_local_comms(Ps_HQA[1:], N, distance_matrix=all_to_all_topology))
     print(f"Non-local communications: {non_local_comunications}")
-    HQA_comms.append(sum(count_non_local_comms(Ps_HQA[1:])))
+    HQA_comms.append(sum(count_non_local_comms(Ps_HQA[1:], N)))
