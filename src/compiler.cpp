@@ -58,6 +58,7 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     run_pass(&operation_graph_pass);
 
     string operations = "";
+    operations += to_string(physical_pass.num_qubits) + ";";
     for (auto operation : operation_graph_pass.operations) {
         operations += operation.gate;
         for (auto qubit : operation.qubits) {
