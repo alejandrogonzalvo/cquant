@@ -68,7 +68,7 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     }
 
     vector<string> args = {operations};
-    PythonWrapper::run_file("../examples/python_files/mapping_algorithm/cquant_test.py", args);
+    PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
 
     cout << "Still alive" << endl;
     PrintPass print_pass(&tokens);
