@@ -20,6 +20,9 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     string_stream << input_stream.rdbuf();
     compiled_text = string_stream.str();
 
+    IncludePass include_pass(&tokens, source);
+    run_pass(&include_pass);
+
     ConstantPropagationPass constant_propagation_pass(&tokens);
     run_pass(&constant_propagation_pass);
 
@@ -72,8 +75,8 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         operations += ";";
     }
 
-    vector<string> args = {operations};
-    PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
+    // vector<string> args = {operations};
+    // PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
 
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);

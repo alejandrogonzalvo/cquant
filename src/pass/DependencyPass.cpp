@@ -30,12 +30,12 @@ void DependencyPass::enterGateOperandList(qasm3Parser::GateOperandListContext *c
 }
 
 void DependencyPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
-    cout << "Qubit map:" << endl;
-    for(auto qubit : qubit_map) {
-        cout << qubit.first << ": ";
-        for(auto gate : qubit.second) {
-            cout << gate << " ";
-        }
-        cout << endl;
-    }
+    // cout << "Qubit map:" << endl;
+    // for(auto qubit : qubit_map) {
+    //     cout << qubit.first << ": ";
+    //     for(auto gate : qubit.second) {
+    //         cout << gate << " ";
+    //     }
+    //     cout << endl;
+    // }
 }

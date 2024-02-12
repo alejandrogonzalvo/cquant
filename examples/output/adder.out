@@ -1,4 +1,3 @@
-include "stdgates.inc" ; 
 defcalgrammar "netsquid" ; 
 defcal rx ( a ) q { 
            

@@ -12,11 +12,11 @@ void OperationGraphPass::enterGateCallStatement(qasm3Parser::GateCallStatementCo
 };
 
 void OperationGraphPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
-    for (auto operation : operations) {
-        cout << operation.gate << ": ";
-        for (auto qubit : operation.qubits) {
-            cout << qubit << " ";
-        }
-        cout << endl;
-    }
+    // for (auto operation : operations) {
+    //     cout << operation.gate << ": ";
+    //     for (auto qubit : operation.qubits) {
+    //         cout << qubit << " ";
+    //     }
+    //     cout << endl;
+    // }
 }
