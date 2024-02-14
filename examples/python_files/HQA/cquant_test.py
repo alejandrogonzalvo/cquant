@@ -24,10 +24,10 @@ for i, timeslice in enumerate(interactions):
         coords[1].append(op[1])
         coords[2].append(op[2])
 
-qubits = 20
+qubits = op_graph.qubits
 HQA_comms = []
 Gs = sparse.COO(coords, 1, (coords[0][-1]+1, qubits, qubits))
-cores = [2]
+cores = [15]
 
 for N in cores:
     part = [i for i in range(N) for _ in range(int(qubits/N))]

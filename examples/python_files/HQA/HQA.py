@@ -74,7 +74,8 @@ def oee(A, G, N, part=None):
     swapped = []
 
     # Step 7
-    while g_max > 0:
+    while g_max > 0 and swaps < 20000:
+        print(f'Swaps: {swaps}')
         # Step 1
         C = [i for i in range(n_nodes)]
         index = 0

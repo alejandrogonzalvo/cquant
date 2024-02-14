@@ -75,8 +75,8 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         operations += ";";
     }
 
-    // vector<string> args = {operations};
-    // PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
+    vector<string> args = {operations};
+    PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
 
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);
