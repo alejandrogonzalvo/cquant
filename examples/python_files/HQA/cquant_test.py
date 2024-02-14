@@ -8,10 +8,10 @@ import numpy as np
 
 operations_array: OperationsArray = OperationsArray(argv[1])
 op_graph: OperationsGraph = OperationsGraph(cquant_circuit=operations_array)
+
 interactions = op_graph.get_future_interactions()
 
 q = op_graph.qubits
-Gs = [[[0 for _ in range(q)] for _ in range(q)] for _ in range(10)]
 coords = [[], [], []]
 for i, timeslice in enumerate(interactions):
     for op_i in timeslice:
@@ -27,7 +27,7 @@ for i, timeslice in enumerate(interactions):
 qubits = op_graph.qubits
 HQA_comms = []
 Gs = sparse.COO(coords, 1, (coords[0][-1]+1, qubits, qubits))
-cores = [15]
+cores = [1]
 
 for N in cores:
     part = [i for i in range(N) for _ in range(int(qubits/N))]
@@ -55,3 +55,4 @@ for N in cores:
                 f.write(f",{core}")
             f.write(";")
                 
+print(q)

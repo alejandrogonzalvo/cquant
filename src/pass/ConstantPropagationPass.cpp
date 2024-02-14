@@ -2,7 +2,7 @@
 
 void ConstantPropagationPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
     Token* pi = CommonTokenFactory::DEFAULT->create(qasm3Parser::Identifier, "pi ").release();
-    const_map[pi] = "3.14159"; // Add more precision later
+    const_map[pi] = "3.14159265359"; // Add more precision later
     for (auto statement : ctx->statement()) {
         for (auto node : getTerminalNodes(statement)) {
             Token* token = node->getSymbol();

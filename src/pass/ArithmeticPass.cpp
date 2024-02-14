@@ -30,20 +30,16 @@ float ArithmeticPass::convertLiteralExpression(Token* token) {
 
 float ArithmeticPass::applyOperation(float left_side, float right_side, Token* operation) {
     size_t op_type = operation->getType();
-    if (op_type == qasm3Parser::PLUS) {
-        return left_side + right_side;
-    } else if (op_type == qasm3Parser::MINUS) {
-        return left_side - right_side;
-    } else if (op_type == qasm3Parser::ASTERISK) {
-        return left_side * right_side;
-    } else if (op_type == qasm3Parser::SLASH) {
-        return left_side / right_side;
-    } else if (op_type == qasm3Parser::PERCENT) {
-        return int(left_side) % int(right_side);
-    } else if (op_type == qasm3Parser::DOUBLE_ASTERISK) {
-        return pow(left_side, right_side);
-    } else {
-        return 0;
+    switch (op_type) {
+        case qasm3Parser::PLUS: return left_side + right_side;
+        case qasm3Parser::MINUS: return left_side - right_side;
+        case qasm3Parser::ASTERISK: return left_side * right_side;
+        case qasm3Parser::SLASH: return left_side / right_side;
+        case qasm3Parser::PERCENT: return int(left_side) % int(right_side);
+        case qasm3Parser::DOUBLE_ASTERISK: return pow(left_side, right_side);
+        
+        default:
+            return 0;
     }
 }
 
@@ -85,19 +81,6 @@ optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionConte
     operations++;
     return applyOperation(left_side_float, right_side_float, operation);    
 }
-
-// void ArithmeticPass::enterProgram(qasm3Parser::ProgramContext *ctx) {
-//     auto terminal_nodes = getTerminalNodes(ctx);
-//     int i = 0;
-//     for (auto terminal_node : terminal_nodes) {
-//         if(terminal_node->getSymbol()->getType() == qasm3Parser::PLUS) {
-//             int sum1 = stoi(terminal_nodes[i-1]->getText());
-//             int sum2 = stoi(terminal_nodes[i+1]->getText());
-//             rewriter.replace(terminal_nodes[i-1]->getSymbol()->getTokenIndex(), terminal_nodes[i+1]->getSymbol()->getTokenIndex(), to_string(sum1 + sum2));
-//         }
-//         i++;
-//     }
-// }
 
 void ArithmeticPass::enterAdditiveExpression(qasm3Parser::AdditiveExpressionContext *ctx) {
     auto left_side = ctx->expression(0);
