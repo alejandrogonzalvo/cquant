@@ -1,5 +1,9 @@
 #include "pass/GateDecompositionPass.hpp"
 
+void GateDecompositionPass::enterProgram(qasm3Parser::ProgramContext *ctx) {
+    replacements = 0;
+}
+
 void GateDecompositionPass::enterGateStatement(qasm3Parser::GateStatementContext *ctx) {
     gates.push_back(ctx);
     inside_gate_definition = true;
@@ -17,8 +21,8 @@ void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatemen
     size_t start_index = ctx->getStart()->getTokenIndex();
     size_t stop_index = ctx->getStop()->getTokenIndex();
 
-    for (auto gate : gates) {
-        if (gate->Identifier()->getText() != ctx->Identifier()->getText()) {
+    for (const auto& gate : gates) {
+        if (*gate == *ctx) {
             continue;
         }
 
@@ -30,13 +34,15 @@ void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatemen
 }
 
 void GateDecompositionPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
-    if (replacements) {
+    if (deleted) {
         return;
     }
 
     for (const auto& ctx : gates) {
         rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex());
     }
+
+    deleted = true;
 }
 
 // PRIVATE METHODS
@@ -68,7 +74,7 @@ void GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementCont
 
 int GateDecompositionPass::find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit) {
     int i = 0;
-    for (auto q : qubits) {
+    for (const auto& q : qubits) {
         if (q->getText() == qubit) {
             return i;
         }

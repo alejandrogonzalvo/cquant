@@ -8,23 +8,14 @@ bool isArithmeticSymbol(Token* token) {
 
 float ArithmeticPass::convertLiteralExpression(Token* token) {
     size_t type = token->getType();
-    if (type == qasm3Parser::DecimalIntegerLiteral) {
-        return stoi(token->getText());
-    }
-    else if(type == qasm3Parser::BinaryIntegerLiteral) {
-        return stoi(token->getText().substr(2), nullptr, 2);
-    }
-    else if(type == qasm3Parser::HexIntegerLiteral) {
-        return stoi(token->getText().substr(2), nullptr, 16);
-    }
-    else if (type == qasm3Parser::OctalIntegerLiteral) {
-        return stoi(token->getText().substr(2), nullptr, 8);
-    }
-    else if(type == qasm3Parser::FloatLiteral) {
-        return stof(token->getText());
-    }
-    else {
-        return 0;
+
+    switch (type) {
+        case qasm3Parser::DecimalIntegerLiteral: return stol(token->getText());
+        case qasm3Parser::BinaryIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 2);
+        case qasm3Parser::HexIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 16);
+        case qasm3Parser::OctalIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 8);
+        case qasm3Parser::FloatLiteral: return stof(token->getText());
+        default: return 0;
     }
 }
 
@@ -118,5 +109,7 @@ void ArithmeticPass::enterPowerExpression(qasm3Parser::PowerExpressionContext *c
         return;
     }
 
-    rewriter.replace(left_side->getStart()->getTokenIndex(), right_side->getStop()->getTokenIndex(), to_string(result.value()));
+    size_t start = left_side->getStart()->getTokenIndex();
+    size_t stop = right_side->getStop()->getTokenIndex();
+    rewriter.replace(start, stop, to_string(result.value()));
 }

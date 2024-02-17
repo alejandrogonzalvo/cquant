@@ -54,5 +54,3 @@ for N in cores:
                 core = str(core)
                 f.write(f",{core}")
             f.write(";")
-                
-print(q)
