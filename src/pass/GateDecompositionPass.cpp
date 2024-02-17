@@ -47,29 +47,31 @@ void GateDecompositionPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
 
 // PRIVATE METHODS
 
-void GateDecompositionPass::insert_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement) {
+string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement) {
     auto statement_tokens = getTerminalNodes(statement);
-    reverse(statement_tokens.begin(), statement_tokens.end());
     size_t stop_index = ctx->getStop()->getTokenIndex();
     auto call_qubits = ctx->gateOperandList()->gateOperand();
 
+    string new_statement = "";
     for (auto terminalNode : statement_tokens) {
         string text = terminalNode->getText();
         int i = find_qubit(gate->qubits->Identifier(), text);
         if (i != call_qubits.size()) {
-            rewriter.insertAfter(stop_index, call_qubits[i]->getText());
+            new_statement += call_qubits[i]->getText();
             continue;
         }
-        rewriter.insertAfter(stop_index, text);
+        new_statement += text;
     }
+    return new_statement;
 }
 
 void GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
     auto statements = gate->scope()->statement();
-    reverse(statements.begin(), statements.end());
+    string gate_body = "";
     for (auto statement : statements) {
-        insert_statement(ctx, gate, statement);
+        gate_body += replace_statement(ctx, gate, statement);
     }
+    rewriter.insertAfter(ctx->getStop()->getTokenIndex(), gate_body);
 }
 
 int GateDecompositionPass::find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit) {
