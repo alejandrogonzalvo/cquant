@@ -2,9 +2,17 @@ from qiskit import QuantumCircuit, qasm3
 from qiskit.circuit.library import QFT
 from sys import argv
 
-if len(argv) != 2:
-    print("Usage: python qft.py <number of qubits>")
+output_file: str = "qft.qasm"
+if len(argv) < 2:
+    print("Usage: python qft.py <number of qubits> [output file]")
     exit(1)
+elif len(argv) == 3:
+    output_file = argv[2]
+else:
+    print("ERROR: too many arguments")
+    print("Usage: python qft.py <number of qubits> [output file]")
+    exit(1)
+
 
 
 circuit: QuantumCircuit = QFT(int(argv[1]))
