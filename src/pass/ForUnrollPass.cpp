@@ -11,7 +11,7 @@ void ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int, 
         }
     }        
     
-    rewriter.Delete(start_index, stop_index);
+        rewriter.Delete(start_index, stop_index);
 }
 
 // PUBLIC CLASS METHODS

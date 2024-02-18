@@ -23,13 +23,14 @@ void BasePass::write_replace(tree::ParseTree* tree, TerminalNode* replaced_node,
     reverse(tree_tokens.begin(), tree_tokens.end());
 
     for (const auto& terminalNode : tree_tokens) {
-        if (*terminalNode == *replaced_node) {
+        if (terminalNode->getText() == replaced_node->getText()) {
             rewriter.insertAfter(index, text_to_replace);
             continue;
         }
 
         rewriter.insertAfter(index, terminalNode->getText());
     }
+
 }
 
 string BasePass::getText() {
