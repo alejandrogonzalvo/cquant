@@ -22,7 +22,7 @@ void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatemen
     size_t stop_index = ctx->getStop()->getTokenIndex();
 
     for (const auto& gate : gates) {
-        if (*gate == *ctx) {
+        if (gate->Identifier()->getText() != ctx->Identifier()->getText()) {
             continue;
         }
 
@@ -68,7 +68,7 @@ string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementCo
 void GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
     auto statements = gate->scope()->statement();
     string gate_body = "";
-    for (auto statement : statements) {
+    for (const auto& statement : statements) {
         gate_body += replace_statement(ctx, gate, statement);
     }
     rewriter.insertAfter(ctx->getStop()->getTokenIndex(), gate_body);
