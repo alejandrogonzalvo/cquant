@@ -1,16 +1,16 @@
 defcalgrammar "netsquid" ; 
 defcal rx ( a ) q { 
-         
+          
     // Syntax for netsquid rx gate
-          } 
+           } 
 defcal ry ( a ) q { 
-         
+          
     // Syntax for netsquid ry gate
-          } 
+           } 
 defcal rz ( a ) q { 
-         
+          
     // Syntax for netsquid rz gate
-          } 
+           } 
 qubit [ 1 ] cin ; 
 qubit [ 4 ] a ; 
 qubit [ 4 ] b ; 
@@ -22,28 +22,28 @@ reset $0 ;
 reset $1 ; 
 reset $2 ; 
 reset $3 ; 
-if ( bool ( a_in [ i ] ) ) x $4 ; 
-if ( bool ( b_in [ i ] ) ) x $5 ; 
-if ( bool ( a_in [ i ] ) ) x $4 ; 
-if ( bool ( b_in [ i ] ) ) x $5 ; 
-if ( bool ( a_in [ i ] ) ) x $4 ; 
-if ( bool ( b_in [ i ] ) ) x $5 ; 
-cx $6 , $7 ; 
-cx $6 , $8 ; 
-ccx $8 , $7 , $6 ; 
-cx $9 , $10 ; 
-cx $9 , $4 ; 
-ccx $4 , $10 , $9 ; 
-cx $9 , $10 ; 
-cx $9 , $4 ; 
-ccx $4 , $10 , $9 ; 
+if ( bool ( a_in [ 2 ] ) ) x $4 ; 
+if ( bool ( b_in [ 2 ] ) ) x $5 ; 
+if ( bool ( a_in [ 1 ] ) ) x $6 ; 
+if ( bool ( b_in [ 1 ] ) ) x $7 ; 
+if ( bool ( a_in [ 0 ] ) ) x $8 ; 
+if ( bool ( b_in [ 0 ] ) ) x $9 ; 
+cx $8 , $9 ; 
+cx $8 , $10 ; 
+ccx $10 , $9 , $8 ; 
 cx $11 , $12 ; 
-ccx $4 , $10 , $9 ; 
-cx $9 , $4 ; 
-cx $4 , $10 ; 
-ccx $4 , $10 , $9 ; 
-cx $9 , $4 ; 
-cx $4 , $10 ; 
-ccx $8 , $7 , $6 ; 
-cx $6 , $8 ; 
-cx $8 , $7 ; 
+cx $11 , $6 ; 
+ccx $6 , $12 , $11 ; 
+cx $13 , $14 ; 
+cx $13 , $8 ; 
+ccx $8 , $14 , $13 ; 
+cx $15 , $16 ; 
+ccx $6 , $12 , $11 ; 
+cx $11 , $6 ; 
+cx $6 , $12 ; 
+ccx $4 , $17 , $18 ; 
+cx $18 , $4 ; 
+cx $4 , $17 ; 
+ccx $10 , $9 , $8 ; 
+cx $8 , $10 ; 
+cx $10 , $9 ; 
