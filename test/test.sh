@@ -26,6 +26,13 @@ fi
 
 make
 
+if [ $? != 0 ]
+then
+    echo ""
+    echo "ERROR: Build failed."
+    exit 1
+fi
+
 cd ../test
 
 
