@@ -18,7 +18,6 @@ done
 
 cd ../build
 
-echo $c
 if [ $c == 1 ]
 then
   sudo rm -r *
@@ -28,6 +27,11 @@ fi
 make
 
 cd ../test
+
+
+echo ""
+echo "TESTING"
+echo "----------------"
 
 test_files=$(ls input/)
 for f in $test_files; do
@@ -54,3 +58,6 @@ then
     echo "ERROR"
     exit 1
 fi
+
+echo ""
+echo "SUCCESS"
