@@ -2,10 +2,12 @@ from qiskit import QuantumCircuit, qasm3
 from qiskit.circuit.library import QFT
 from sys import argv
 
-output_file: str = "qft.qasm"
+output_file: str = ""
 if len(argv) < 2:
     print("Usage: python qft.py <number of qubits> [output file]")
     exit(1)
+elif len(argv) == 2:
+    output_file = "qft.qasm"
 elif len(argv) == 3:
     output_file = argv[2]
 else:
@@ -17,7 +19,7 @@ else:
 
 circuit: QuantumCircuit = QFT(int(argv[1]))
 
-with open("../input/qft.qasm", "w") as f:
+with open(output_file, "w") as f:
     content: str = qasm3.dumps(circuit)
     content.replace("stdgates", "mygates", 1)
     f.write(qasm3.dumps(circuit))

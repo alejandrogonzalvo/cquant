@@ -27,5 +27,30 @@ fi
 
 make
 
-test_files=$(ls ../examples/test_input)
-echo $test_files
+cd ../test
+
+test_files=$(ls input/)
+for f in $test_files; do
+    echo "Testing $f"
+    ./../build/cquant input/$f output/$f.out
+    if [ $? != 0 ]
+    then
+        echo "ERROR: cquant failed for $f."
+        exit 1
+    fi
+
+    diff output/$f.out validated_output/$f.out
+    if [ $? != 0 ]
+    then
+        echo "ERROR: Diff failed for $f."
+        exit 1
+    fi
+done
+
+
+
+if [ $? != 0 ]
+then
+    echo "ERROR"
+    exit 1
+fi

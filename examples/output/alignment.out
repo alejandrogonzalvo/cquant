@@ -1,0 +1,8 @@
+stretch g ; 
+qubit [ 3 ] q ; 
+barrier $0 ; 
+ctrl @ x $1 , $2 ; 
+delay [ g ] $3 ; 
+U ( 0.785398 , 0 , 1.570796 ) $3 ; 
+delay [ 2 * g ] $3 ; 
+barrier $0 ; 
