@@ -10,8 +10,8 @@ private:
     bool inside_gate_definition = false;
     bool deleted = false;
 
-    int find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit);
-    string replace_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement);
+    int find_qubit(const set<string>& qubits, const string& qubit);
+    string replace_statement(qasm3Parser::GateCallStatementContext* ctx, const set<string>& qubits, qasm3Parser::StatementContext* statement);
     string replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate);
     
 public:

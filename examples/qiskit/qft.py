@@ -16,7 +16,6 @@ else:
     exit(1)
 
 
-
 circuit: QuantumCircuit = QFT(int(argv[1]))
 
 with open(output_file, "w") as f:

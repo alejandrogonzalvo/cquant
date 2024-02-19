@@ -1,7 +1,6 @@
 #include "pass/MappingPass.hpp"
 
-void MappingPass::enterIndexedIdentifier(qasm3Parser::IndexedIdentifierContext *ctx) {
-    string qubit_name = ctx->getText();
+string MappingPass::map_qubit(string qubit_name) {
     if (qubit_map.find(qubit_name) == qubit_map.end()) {
         num_qubits++;
         json &qubit_data = data["network"]["cores"][0]["core"]["qubits"];
@@ -14,5 +13,16 @@ void MappingPass::enterIndexedIdentifier(qasm3Parser::IndexedIdentifierContext *
         }
     }
 
-    rewriter.replace(ctx->start, ctx->stop, qubit_map[qubit_name]);
+    return qubit_map[qubit_name];
+}
+    
+
+
+void MappingPass::enterGateCallStatement(qasm3Parser::GateCallStatementContext *ctx) {
+    const auto& qubits = ctx->gateOperandList()->gateOperand();
+
+    for (const auto& qubit : qubits) {
+        string physical_id = map_qubit(qubit->getText());
+        rewriter.replace(qubit->start, qubit->stop, physical_id);
+    }
 }

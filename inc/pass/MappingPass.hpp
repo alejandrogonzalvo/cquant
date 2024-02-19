@@ -16,5 +16,6 @@ public:
         data = json::parse(json_file);
     }
 
-    void enterIndexedIdentifier(qasm3Parser::IndexedIdentifierContext *ctx) override;
+    void enterGateCallStatement(qasm3Parser::GateCallStatementContext *ctx) override;
+    string map_qubit(string qubit_name);
 };

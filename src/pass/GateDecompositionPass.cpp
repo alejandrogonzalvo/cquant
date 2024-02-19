@@ -47,7 +47,7 @@ void GateDecompositionPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
 
 // PRIVATE METHODS
 
-string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement) {
+string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementContext* ctx,const set<string>& qubits, qasm3Parser::StatementContext* statement) {
     auto statement_tokens = getTerminalNodes(statement);
     size_t stop_index = ctx->getStop()->getTokenIndex();
     auto call_qubits = ctx->gateOperandList()->gateOperand();
@@ -55,7 +55,7 @@ string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementCo
     string new_statement = "";
     for (auto terminalNode : statement_tokens) {
         string text = terminalNode->getText();
-        int i = find_qubit(gate->qubits->Identifier(), text);
+        int i = find_qubit(qubits, text);
         if (i != call_qubits.size()) {
             new_statement += call_qubits[i]->getText();
             continue;
@@ -68,17 +68,21 @@ string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementCo
 string GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
     auto statements = gate->scope()->statement();
     string gate_body = "";
+    set<string> qubits;
+    for (const auto& qubit : gate->qubits->Identifier()) {
+        qubits.insert(qubit->getText());
+    }
     for (const auto& statement : statements) {
-        gate_body += replace_statement(ctx, gate, statement);
+        gate_body += replace_statement(ctx, qubits, statement);
     }
 
     return gate_body;
 }
 
-int GateDecompositionPass::find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit) {
+int GateDecompositionPass::find_qubit(const set<string>& qubits, const string& qubit) {
     int i = 0;
-    for (const auto& q : qubits) {
-        if (q->getText() == qubit) {
+    for (const string& q : qubits) {
+        if (q == qubit) {
             return i;
         }
         i++;

@@ -34,7 +34,6 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         if (!gate_decomposition_pass.replacements) break;
     }
 
-
     while (true) {
         // TODO: Solve Memory Leak with long rewrite Operations
         ForUnrollPass for_unroll_pass(&tokens);
@@ -53,9 +52,6 @@ void Compiler::compile(const std::string& source, const std::string& output) {
             break;
         }
     }
-    
-    DependencyPass dependency_pass(&tokens);
-    run_pass(&dependency_pass);
 
     MappingPass physical_pass(&tokens, "../examples/architecture_files/2Dgrid.json");
     run_pass(&physical_pass);
