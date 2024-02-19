@@ -11,9 +11,9 @@ float ArithmeticPass::convertLiteralExpression(Token* token) {
 
     switch (type) {
         case qasm3Parser::DecimalIntegerLiteral: return stol(token->getText());
-        case qasm3Parser::BinaryIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 2);
-        case qasm3Parser::HexIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 16);
-        case qasm3Parser::OctalIntegerLiteral: return stoi(token->getText().substr(2), nullptr, 8);
+        case qasm3Parser::BinaryIntegerLiteral: return stol(token->getText().substr(2), nullptr, 2);
+        case qasm3Parser::HexIntegerLiteral: return stol(token->getText().substr(2), nullptr, 16);
+        case qasm3Parser::OctalIntegerLiteral: return stol(token->getText().substr(2), nullptr, 8);
         case qasm3Parser::FloatLiteral: return stof(token->getText());
         default: return 0;
     }
