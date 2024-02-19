@@ -8,6 +8,5 @@ void IncludePass::enterIncludeStatement(qasm3Parser::IncludeStatementContext *ct
 
     size_t start = ctx->getStart()->getTokenIndex();
     size_t stop = ctx->getStop()->getTokenIndex();
-    rewriter.insertAfter(stop, content);
-    rewriter.Delete(start, stop);
+    rewriter.replace(start, stop, content);
 }
