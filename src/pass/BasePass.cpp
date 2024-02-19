@@ -18,18 +18,19 @@ vector<tree::TerminalNode *> BasePass::getTerminalNodes(tree::ParseTree *tree) {
     return terminalNodes;
 }
 
-void BasePass::write_replace(tree::ParseTree* tree, TerminalNode* replaced_node, string text_to_replace, size_t index) {
+string BasePass::write_replace(tree::ParseTree* tree, TerminalNode* replaced_node, string text_to_replace) {
     auto tree_tokens = getTerminalNodes(tree);
-    reverse(tree_tokens.begin(), tree_tokens.end());
 
+    string text = "";
     for (const auto& terminalNode : tree_tokens) {
         if (terminalNode->getText() == replaced_node->getText()) {
-            rewriter.insertAfter(index, text_to_replace);
+            text += text_to_replace;
             continue;
         }
 
-        rewriter.insertAfter(index, terminalNode->getText());
+        text += terminalNode->getText();
     }
+    return text;
 
 }
 

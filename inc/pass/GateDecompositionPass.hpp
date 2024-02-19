@@ -12,7 +12,7 @@ private:
 
     int find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit);
     string replace_statement(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate, qasm3Parser::StatementContext* statement);
-    void replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate);
+    string replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate);
     
 public:
     using BasePass::BasePass;

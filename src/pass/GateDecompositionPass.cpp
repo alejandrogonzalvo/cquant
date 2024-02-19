@@ -26,15 +26,15 @@ void GateDecompositionPass::enterGateCallStatement(qasm3Parser::GateCallStatemen
             continue;
         }
 
-        replace_gate_call(ctx, gate);
-        rewriter.Delete(start_index, stop_index);
+        string decomposed_gate = replace_gate_call(ctx, gate);
+        rewriter.replace(start_index, stop_index, decomposed_gate);
         replacements++;
         return;
     }
 }
 
 void GateDecompositionPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
-    if (deleted) {
+    if (replacements) {
         return;
     }
 
@@ -65,13 +65,14 @@ string GateDecompositionPass::replace_statement(qasm3Parser::GateCallStatementCo
     return new_statement;
 }
 
-void GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
+string GateDecompositionPass::replace_gate_call(qasm3Parser::GateCallStatementContext* ctx, qasm3Parser::GateStatementContext* gate) {
     auto statements = gate->scope()->statement();
     string gate_body = "";
     for (const auto& statement : statements) {
         gate_body += replace_statement(ctx, gate, statement);
     }
-    rewriter.insertAfter(ctx->getStop()->getTokenIndex(), gate_body);
+
+    return gate_body;
 }
 
 int GateDecompositionPass::find_qubit(const vector<tree::TerminalNode*>& qubits, const string& qubit) {

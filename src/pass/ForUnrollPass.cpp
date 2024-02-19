@@ -1,17 +1,17 @@
 #include "pass/ForUnrollPass.hpp"
 
 // PRIVATE CLASS METHODS
-void ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int, vector<qasm3Parser::StatementContext*> statements, qasm3Parser::ForStatementContext* ctx) {
+string ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int, vector<qasm3Parser::StatementContext*> statements, qasm3Parser::ForStatementContext* ctx) {
     size_t start_index = statements.front()->getStart()->getTokenIndex();
     size_t stop_index = statements.back()->getStop()->getTokenIndex();
-    reverse(statements.begin(), statements.end());
+    string unrolled_for = "";
     for (int i = start_int; i != end_int; i+= step_int) {
         for (auto statement : statements) {            
-            write_replace(statement, ctx->Identifier(), to_string(i), stop_index);
+            unrolled_for += write_replace(statement, ctx->Identifier(), to_string(i));
         }
     }        
     
-        rewriter.Delete(start_index, stop_index);
+    return unrolled_for;
 }
 
 // PUBLIC CLASS METHODS
@@ -51,12 +51,11 @@ void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
         statements.push_back(statement_scope->statement());
     } else {
         statements = statement_scope->scope()->statement();
-    }
+    }    rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->statementOrScope()->getStart()->getTokenIndex());
+    // rewriter.Delete(ctx->statementOrScope()->getStop()->getTokenIndex());
 
-    unroll_statements(start_int, end_int, step_int, statements, ctx);
-
-    rewriter.Delete(ctx->getStart()->getTokenIndex(), ctx->statementOrScope()->getStart()->getTokenIndex());
-    rewriter.Delete(ctx->statementOrScope()->getStop()->getTokenIndex());
+    string unrolled_for = unroll_statements(start_int, end_int, step_int, statements, ctx);
+    rewriter.replace(ctx->getStart()->getTokenIndex(), ctx->getStop()->getTokenIndex(), unrolled_for);
 }
 
 void ForUnrollPass::exitForStatement(qasm3Parser::ForStatementContext *ctx) {
