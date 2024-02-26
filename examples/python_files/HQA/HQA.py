@@ -35,7 +35,7 @@ def validate_partition(G, P, inf=2**16):
     
     return True
 
-def count_non_local_comms(Ps, N, distance_matrix=None):
+def count_non_local_comms(Ps, N, distance_matrix=None) -> list:
     if distance_matrix == None:
         distance_matrix = [[1 if j != i else 0 for j in range(N)] for i in range(N)]
 
@@ -57,7 +57,6 @@ def oee(A, G, N, part=None):
 
     :return: OEE solution
     '''
-    
     if isinstance(A, sparse.COO):
         A = A.todense()
     
@@ -74,8 +73,8 @@ def oee(A, G, N, part=None):
     swapped = []
 
     # Step 7
-    while g_max > 0 and swaps < 3000:
-        print(f'Swaps: {swaps}')
+    while g_max > 0:
+        print(f'g_max: {g_max}')
         # Step 1
         C = [i for i in range(n_nodes)]
         index = 0
@@ -148,16 +147,15 @@ def oee(A, G, N, part=None):
     
     return part, swaps, swapped
 
-
 def get_qubits_per_core(physical_qubits, N):
     return [physical_qubits/N for _ in range(N)]
 
 def normalize_vector(vector):
     return [val/sum(vector) if sum(vector)!=0 else 0 for val in vector]
 
-def get_troubling_cores(free_spaces):
+def get_troubling_cores(free_spaces, N):
     troubling_cores = []
-    for core_idx in range(len(free_spaces)):
+    for core_idx in range(N):
         if free_spaces[core_idx] %2 != 0:
             troubling_cores.append(core_idx)
     return troubling_cores
@@ -263,9 +261,6 @@ def assign_qubits_to_cores(unplaced_qubits, N, P, free_spaces, distance_matrix, 
         for idx in pairs_to_remove[::-1]:
             del(unplaced_qubits[idx])
 
-def all_to_all(N):
-    return [[1 if j != i else 0 for j in range(N)] for i in range(N)]
-
 def order_qubits(G, q1, q2, L, P, Ps, i, well_placed_qubits, unplaced_qubits, free_spaces, core_likelihood, qubits):
     if G[q1][q2] != 1:
         return
@@ -292,10 +287,6 @@ def order_qubits(G, q1, q2, L, P, Ps, i, well_placed_qubits, unplaced_qubits, fr
     core_likelihood[q2] = normalize_vector(core_likelihood[q2])
 
 def HQA(Gs, Ps, N, qubits, physical_qubits, distance_matrix=None):
-    if distance_matrix == None:
-        distance_matrix = all_to_all(N)
-
-
     for i in tqdm(range(len(Gs))):
         Ps[i+1] = Ps[i]
         L = lookahead(Gs[i:])
@@ -322,14 +313,14 @@ def HQA(Gs, Ps, N, qubits, physical_qubits, distance_matrix=None):
                 order_qubits(G, q1, q2, L, P, Ps, i, well_placed_qubits, unplaced_qubits, free_spaces, core_likelihood, qubits)
 
         # Check which cores have odd number of interacting qubits (trouble)
-        troubling_cores = get_troubling_cores(free_spaces)
+        troubling_cores = get_troubling_cores(free_spaces, N)
         pair_troubling_qubits(troubling_cores, Ps[i+1], movable_qubits, free_spaces, unplaced_qubits, core_likelihood, qubits, L)
 
         assign_qubits_to_cores(unplaced_qubits, N, Ps[i+1], free_spaces, distance_matrix, core_likelihood, well_placed_qubits, i, Ps, qubits, L)
                 
         if not (validate_partition(Gs[i], Ps[i+1])):
             print('Error!')
-        # else:
-            # print('OK!')
+        else:
+            print('OK!')
 
     return Ps

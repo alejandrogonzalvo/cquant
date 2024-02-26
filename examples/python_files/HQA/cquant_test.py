@@ -2,6 +2,7 @@ from sys import argv
 from cquant import Gate, OperationsArray
 from operations_graph import OperationsGraph
 from HQA import HQA, lookahead, oee, count_non_local_comms
+import connection_matrix
 import sparse
 import random
 import numpy as np
@@ -14,6 +15,8 @@ interactions = op_graph.get_future_interactions()
 q = op_graph.qubits
 coords = [[], [], []]
 for i, timeslice in enumerate(interactions):
+    print(timeslice)
+    used_qubits = set()
     for op_i in timeslice:
         op = op_graph.operations[op_i]
 
@@ -24,9 +27,17 @@ for i, timeslice in enumerate(interactions):
         coords[1].append(op[1])
         coords[2].append(op[2])
 
+        coords[0].append(i)
+        coords[1].append(op[2])
+        coords[2].append(op[1])
+
 qubits = op_graph.qubits
 HQA_comms = []
-Gs = sparse.COO(coords, 1, (coords[0][-1]+1, qubits, qubits))
+
+print(len(interactions), qubits)
+
+Gs = sparse.COO(coords, 1, shape=(len(interactions), qubits, qubits))
+# print(Gs)
 cores = [50]
 
 for N in cores:
@@ -39,13 +50,14 @@ for N in cores:
     #### Modifying initial partition (OEE instead of random assignation)
     Ps[0], _, _ = oee(lookahead(Gs), None, N, part)
 
-    all_to_all_topology = None
-    Ps_HQA = HQA(Gs, Ps.copy(), N, qubits, qubits, distance_matrix=all_to_all_topology)
+    topology = connection_matrix.ring(N)
+    Ps_HQA = HQA(Gs, Ps.copy(), N, qubits, qubits, distance_matrix=topology)
 
     print(Ps_HQA)
-    non_local_comunications = sum(count_non_local_comms(Ps_HQA[1:], N, distance_matrix=all_to_all_topology))
+    non_local_comunications = sum(count_non_local_comms(Ps_HQA[1:], N, distance_matrix=topology))
     print(f"Non-local communications: {non_local_comunications}")
     HQA_comms.append(sum(count_non_local_comms(Ps_HQA[1:], N)))
+    
 
     with open('output', "w") as f:
         for ts in Ps_HQA:
