@@ -1,4 +1,7 @@
 #include "compiler.hpp"
+#include <chrono>
+
+using namespace chrono;
 
 void Compiler::run_pass(BasePass* listener) {
     input.reset();
@@ -35,7 +38,6 @@ void Compiler::compile(const std::string& source, const std::string& output) {
     }
 
     while (true) {
-        // TODO: Solve Memory Leak with long rewrite Operations
         ForUnrollPass for_unroll_pass(&tokens);
         run_pass(&for_unroll_pass);
 
@@ -72,8 +74,19 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         operations += ";";
     }
 
+
+
     vector<string> args = {operations};
     PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
+
+
+    auto start2 = high_resolution_clock::now();
+    OperationsGraph operations_graph(operation_graph_pass.operations, physical_pass.num_qubits);
+    vector<set<int>> interactions = operations_graph.get_future_interactions();
+    auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start2).count();
+    cout << "C++ time: " << cpp_time << "ms" << endl;
+
+    return;
 
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);

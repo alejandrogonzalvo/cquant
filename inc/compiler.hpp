@@ -9,6 +9,8 @@
 #include "pass/Passes.hpp"
 #include "python_wrapper/PythonWrapper.hpp"
 
+#include "structs/OperationsGraph.hpp"
+
 using namespace std;
 using namespace antlr4;
 using namespace openqasm;

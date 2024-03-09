@@ -1,13 +1,7 @@
 #pragma once
 
 #include "pass/BasePass.hpp"
-
-class Operation {
-public:
-    string gate;
-    vector<int> qubits;
-
-};
+#include "structs/Operation.hpp"
 
 class OperationGraphPass : public BasePass {
 public:
