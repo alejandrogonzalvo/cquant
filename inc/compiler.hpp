@@ -26,14 +26,12 @@ private:
     string compiled_text;
     ofstream output_stream;
 
-
     void run_pass(BasePass* listener);
 
 public:
-    Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {
-        compiled_text.reserve(1048576*100);
-    };
+    Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {};
     ~Compiler() = default;
 
     void compile(const std::string& source, const std::string& output);
+    void add_pass()
 };
