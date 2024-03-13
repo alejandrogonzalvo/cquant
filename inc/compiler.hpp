@@ -33,5 +33,4 @@ public:
     ~Compiler() = default;
 
     void compile(const std::string& source, const std::string& output);
-    void add_pass()
 };
