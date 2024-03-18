@@ -2,3 +2,6 @@ build
 .vscode
 *.qasm.out
 *.pyc
+cquant
+output
+*.npz

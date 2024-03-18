@@ -1,6 +1,17 @@
 # CQUANT
 CQUANT (Compiler for QUAntum NeTworks) is a powerful compiler to generate physical OpenQASM3 from high level OpenQASM3 code and an architecture JSON file.
 
+## Usage
+
+How to build:
+```bash
+./build.sh
+```
+
+How to use:
+```bash
+./cquant -o examples/output/random.out -m examples/mapping_algorithms/HQA/cquant_test.py examples/input/random.qasm
+```
 ## Qiskit Integration
 TODO
 
