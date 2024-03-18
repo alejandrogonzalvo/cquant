@@ -38,7 +38,7 @@ print(len(interactions), qubits)
 
 Gs = sparse.COO(coords, 1, shape=(len(interactions), qubits, qubits))
 # print(Gs)
-cores = [50]
+cores = [2]
 
 for N in cores:
     part = [i for i in range(N) for _ in range(int(qubits/N))]
