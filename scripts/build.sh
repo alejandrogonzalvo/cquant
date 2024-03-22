@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+cd ..
 
 OPTSTRING=":c"
 

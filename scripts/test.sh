@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+cd ..
+
 echo ""
 echo "TESTING"
 echo "----------------"
@@ -7,7 +9,7 @@ echo "----------------"
 test_files=$(ls test/input/)
 for f in $test_files; do
     echo "Testing $f"
-    ./cquant test/input/$f  -o test/output/$f.out
+    ./cquant -o test/output/$f.out test/input/$f
     if [ $? != 0 ]
     then
         echo "ERROR: cquant failed for $f."
