@@ -12,3 +12,5 @@
 #include "pass/CalibrationPass.hpp"
 #include "pass/OperationGraphPass.hpp"
 #include "pass/IncludePass.hpp"
+
+#include "pass/mapping/RouteForcing.hpp"

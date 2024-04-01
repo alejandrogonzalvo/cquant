@@ -12,10 +12,8 @@ op_graph: OperationsGraph = OperationsGraph(cquant_circuit=operations_array)
 
 interactions = op_graph.get_future_interactions()
 
-q = op_graph.qubits
 coords = [[], [], []]
 for i, timeslice in enumerate(interactions):
-    print(timeslice)
     used_qubits = set()
     for op_i in timeslice:
         op = op_graph.operations[op_i]
@@ -38,7 +36,7 @@ print(len(interactions), qubits)
 
 Gs = sparse.COO(coords, 1, shape=(len(interactions), qubits, qubits))
 # print(Gs)
-cores = [2]
+cores: list[int] = [int(argv[2])]
 
 for N in cores:
     part = [i for i in range(N) for _ in range(int(qubits/N))]

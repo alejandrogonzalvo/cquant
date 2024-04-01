@@ -15,13 +15,26 @@ using gate = int;
 
 public:
     int qubits;
-    vector<Operation>& operations;
+    vector<Operation> operations;
     set<int> head;
     map<gate, set<gate>> op_requirements;
     map<gate, set<gate>> reverse_requirements;
 
+        OperationsGraph& operator=(const OperationsGraph& other) {
+            if (this == &other) {
+                return *this;
+            }
+
+            qubits = other.qubits;
+            operations = other.operations;
+            head = other.head;
+            op_requirements = other.op_requirements;
+            reverse_requirements = other.reverse_requirements;
+
+            return *this;
+        }
     
-public:
+    OperationsGraph() = default;
     OperationsGraph(vector<Operation>& ops, int qubits) : operations(ops), qubits(qubits) {
         map<qubit, gate> last_qubit_gate;
 
@@ -76,7 +89,7 @@ public:
         vector<set<int>> interactions = {head};
         map<gate, int> candidates;
 
-        set<int>& aux_head = head;
+        set<int> aux_head = head;
 
         if (k == 0){
             k = 1000;
@@ -100,7 +113,7 @@ public:
                 }
             }
 
-            for (const int& op : aux_head){
+            for (const int op : aux_head){
                 candidates.erase(op);
             }
 
@@ -112,5 +125,21 @@ public:
         }
 
         return interactions;
+    }
+
+    void ops_completed(const std::vector<int>& op_index_list) {
+        for (int op_index : op_index_list) {
+
+            op_requirements[op_index].clear();
+            head.erase(op_index);
+
+            for (int op_index_2 : reverse_requirements[op_index]) {
+                op_requirements[op_index_2].erase(op_index);
+
+                if (op_requirements[op_index_2].empty()) {
+                    head.insert(op_index_2);
+                }
+            }
+        }
     }
 };

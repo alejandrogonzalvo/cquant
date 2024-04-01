@@ -1,5 +1,5 @@
 OPENQASM 3;
-include "mygates.inc";
+include "stdgates.inc";
 gate QFT _gate_q_0, _gate_q_1, _gate_q_2, _gate_q_3, _gate_q_4, _gate_q_5, _gate_q_6, _gate_q_7, _gate_q_8, _gate_q_9, _gate_q_10, _gate_q_11, _gate_q_12, _gate_q_13, _gate_q_14, _gate_q_15, _gate_q_16, _gate_q_17, _gate_q_18, _gate_q_19, _gate_q_20, _gate_q_21, _gate_q_22, _gate_q_23, _gate_q_24, _gate_q_25, _gate_q_26, _gate_q_27, _gate_q_28, _gate_q_29, _gate_q_30, _gate_q_31, _gate_q_32, _gate_q_33, _gate_q_34, _gate_q_35, _gate_q_36, _gate_q_37, _gate_q_38, _gate_q_39, _gate_q_40, _gate_q_41, _gate_q_42, _gate_q_43, _gate_q_44, _gate_q_45, _gate_q_46, _gate_q_47, _gate_q_48, _gate_q_49, _gate_q_50, _gate_q_51, _gate_q_52, _gate_q_53, _gate_q_54, _gate_q_55, _gate_q_56, _gate_q_57, _gate_q_58, _gate_q_59, _gate_q_60, _gate_q_61, _gate_q_62, _gate_q_63, _gate_q_64, _gate_q_65, _gate_q_66, _gate_q_67, _gate_q_68, _gate_q_69, _gate_q_70, _gate_q_71, _gate_q_72, _gate_q_73, _gate_q_74, _gate_q_75, _gate_q_76, _gate_q_77, _gate_q_78, _gate_q_79, _gate_q_80, _gate_q_81, _gate_q_82, _gate_q_83, _gate_q_84, _gate_q_85, _gate_q_86, _gate_q_87, _gate_q_88, _gate_q_89, _gate_q_90, _gate_q_91, _gate_q_92, _gate_q_93, _gate_q_94, _gate_q_95, _gate_q_96, _gate_q_97, _gate_q_98, _gate_q_99 {
   h _gate_q_99;
   cp(pi/2) _gate_q_99, _gate_q_98;

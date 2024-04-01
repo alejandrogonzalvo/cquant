@@ -3,7 +3,7 @@
  * Cuccaro et al, quant-ph/0410184
  */
 
-include "mygates.qasm";
+include "stdgates.inc";
 
 qubit[1] cin;
 qubit[4] a;

@@ -32,5 +32,5 @@ public:
     Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {};
     ~Compiler() = default;
 
-    void compile(const std::string& source, const std::string& output);
+    void compile(const string& source, const string& output, const string& mapping_file, const string& architecture_file);
 };

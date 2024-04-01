@@ -15,7 +15,7 @@ void Compiler::run_pass(BasePass* listener) {
     compiled_text = listener->getText();
 }
 
-void Compiler::compile(const std::string& source, const std::string& output) {
+void Compiler::compile(const string& source, const string& output, const string& mapping_file, const string& architecture_file) {
     fstream input_stream;
     stringstream string_stream;
 
@@ -55,7 +55,7 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         }
     }
 
-    MappingPass physical_pass(&tokens, "../examples/architecture_files/2Dgrid.json");
+    MappingPass physical_pass(&tokens, architecture_file);
     run_pass(&physical_pass);
 
     CalibrationPass calibration_pass(&tokens);
@@ -74,19 +74,34 @@ void Compiler::compile(const std::string& source, const std::string& output) {
         operations += ";";
     }
 
+    OperationsGraph op_graph(operation_graph_pass.operations, physical_pass.num_qubits);
+    
+    vector<RouteForcing::qubit_coord> coords = {};
+    for (int i=0; i<5; i++) {
+        for(int j=0; j<5; j++) {
+            coords.push_back(make_pair(i, j));
+        }
+    }
+
+    RouteForcing route_forcing(op_graph, coords);
+
+    route_forcing.place("trivial");
+    route_forcing.map();
+
+    cout << "Swap gates: " << route_forcing.added_swaps << endl;
 
 
-    vector<string> args = {operations};
-    PythonWrapper::run_file("../examples/python_files/HQA/cquant_test.py", args);
+
+    // cout << operations << endl;
+    // vector<string> args = {operations, to_string(physical_pass.data["network"]["core_number"]), to_string(physical_pass.data["network"]["qubit_number"])};
+    // PythonWrapper::run_file(mapping_file, args);
 
 
-    auto start2 = high_resolution_clock::now();
-    OperationsGraph operations_graph(operation_graph_pass.operations, physical_pass.num_qubits);
-    vector<set<int>> interactions = operations_graph.get_future_interactions();
-    auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start2).count();
-    cout << "C++ time: " << cpp_time << "ms" << endl;
-
-    return;
+    // auto start2 = high_resolution_clock::now();
+    // OperationsGraph operations_graph(operation_graph_pass.operations, physical_pass.num_qubits);
+    // vector<set<int>> interactions = operations_graph.get_future_interactions();
+    // auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start2).count();
+    // cout << "C++ time: " << cpp_time << "ms" << endl;
 
     PrintPass print_pass(&tokens);
     run_pass(&print_pass);

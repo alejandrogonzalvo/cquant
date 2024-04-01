@@ -12,7 +12,7 @@ elif len(argv) == 4:
     output_file = argv[3]
 else:
     print("ERROR: too many arguments")
-    print("Usage: python qft.py <number of qubits> [output file]")
+    print("Usage: python qft.py <number of qubits> <circuit depth> [output file]")
     exit(1)
 
 
