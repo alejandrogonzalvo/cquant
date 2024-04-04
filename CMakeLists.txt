@@ -49,7 +49,7 @@ add_executable(cquant src/cquant.cpp src/compiler.cpp
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
 
-target_compile_options(cquant PUBLIC -g3)
-target_compile_options(antlr4_static INTERFACE -g3)
+target_compile_options(cquant PUBLIC -O3)
+target_compile_options(antlr4_static INTERFACE -O3)
 
 target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json python3.10)

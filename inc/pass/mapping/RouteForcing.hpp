@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef GRID_SIZE
+#define GRID_SIZE 20
+#endif
+
 #include <structs/OperationsGraph.hpp>
 #include <string>
 #include <cmath>
@@ -246,8 +250,8 @@ public:
                         attraction_forces[ph_qubit_2] = make_pair(0, 0);
                     }
 
-                    pair<float, float> force_1 = attraction_force_unitary(ph_qubit_1, ph_qubit_2);
-                    pair<float, float> force_2 = make_pair(-force_1.first, -force_1.second);
+                    attraction_force force_1 = attraction_force_unitary(ph_qubit_1, ph_qubit_2);
+                    attraction_force force_2 = make_pair(-force_1.first, -force_1.second);
 
                     attraction_forces[ph_qubit_1].first += d_static(i) * force_1.first;
                     attraction_forces[ph_qubit_1].second += d_static(i) * force_1.second;
@@ -260,13 +264,11 @@ public:
             unordered_map<pair<qubit_coord, qubit_coord>, float, hash_pair> edges_ranking = {};
 
             for (const auto& [ph_qubit, force] : attraction_forces) {
-                vector<pair<qubit_coord, qubit_coord>> edges = {}; // TODO: Create function to get qubit edges;
-                if (ph_qubit.first != 4) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first+1, ph_qubit.second)));
+                vector<pair<qubit_coord, qubit_coord>> edges = {};
+                if (ph_qubit.first != (GRID_SIZE-1)) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first+1, ph_qubit.second)));
                 if (ph_qubit.first != 0) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first-1, ph_qubit.second)));
-                if (ph_qubit.second != 4)edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second+1)));
+                if (ph_qubit.second != (GRID_SIZE-1))edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second+1)));
                 if (ph_qubit.second != 0) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second-1)));
-
-                
 
                 for (const auto& edge : edges) {
                     if (freezed_ph_qubits.count(edge.first) || freezed_ph_qubits.count(edge.second)) continue;
@@ -292,7 +294,7 @@ public:
             std::vector<pair<float, pair<qubit_coord, qubit_coord>>> edges_list;
             for (const auto& kv : edges_ranking) {
                 if (kv.second > 0) {
-                    edges_list.push_back(std::make_pair(kv.second, kv.first));
+                    edges_list.push_back(make_pair(kv.second, kv.first));
                 }
             }
 

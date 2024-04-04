@@ -77,12 +77,13 @@ void Compiler::compile(const string& source, const string& output, const string&
     OperationsGraph op_graph(operation_graph_pass.operations, physical_pass.num_qubits);
     
     vector<RouteForcing::qubit_coord> coords = {};
-    for (int i=0; i<5; i++) {
-        for(int j=0; j<5; j++) {
+    for (int i=0; i<GRID_SIZE; i++) {
+        for(int j=0; j<GRID_SIZE; j++) {
             coords.push_back(make_pair(i, j));
         }
     }
 
+    auto start = high_resolution_clock::now();
     RouteForcing route_forcing(op_graph, coords);
 
     route_forcing.place("trivial");
@@ -90,6 +91,8 @@ void Compiler::compile(const string& source, const string& output, const string&
 
     cout << "Swap gates: " << route_forcing.added_swaps << endl;
 
+    auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start).count();
+    cout << "Mapping time: " << cpp_time << "ms" << endl;
 
 
     // cout << operations << endl;

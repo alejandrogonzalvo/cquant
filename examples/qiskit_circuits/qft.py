@@ -20,5 +20,4 @@ circuit: QuantumCircuit = QFT(int(argv[1]))
 
 with open(output_file, "w") as f:
     content: str = qasm3.dumps(circuit)
-    content.replace("stdgates", "mygates", 1)
     f.write(qasm3.dumps(circuit))

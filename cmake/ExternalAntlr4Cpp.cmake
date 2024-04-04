@@ -152,7 +152,7 @@ target_include_directories(antlr4_static
 
 target_compile_options(antlr4_static
     INTERFACE
-        -g3
+        -O3
 )
 
 ExternalProject_Add_Step(
