@@ -18,14 +18,18 @@ while getopts ${OPTSTRING} opt; do
   esac
 done
 
+if [ ! -d "build" ]; then
+  mkdir build
+fi
+
 cd build
 
 if [ $c == 1 ]
 then
   sudo rm -r *
-  cmake ..
 fi
 
+cmake ..
 make
 
 if [ $? != 0 ]
