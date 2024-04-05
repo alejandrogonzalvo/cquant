@@ -13,6 +13,8 @@ string MappingPass::map_qubit(string qubit_name) {
         }
     }
 
+    cout << "it:" << it++ << endl;
+
     return qubit_map[qubit_name];
 }
     

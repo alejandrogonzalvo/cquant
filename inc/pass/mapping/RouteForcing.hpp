@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef GRID_SIZE
-#define GRID_SIZE 20
+#define GRID_SIZE 32
 #endif
 
 #include <structs/OperationsGraph.hpp>
@@ -264,24 +264,17 @@ public:
             unordered_map<pair<qubit_coord, qubit_coord>, float, hash_pair> edges_ranking = {};
 
             for (const auto& [ph_qubit, force] : attraction_forces) {
-                vector<pair<qubit_coord, qubit_coord>> edges = {};
-                if (ph_qubit.first != (GRID_SIZE-1)) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first+1, ph_qubit.second)));
-                if (ph_qubit.first != 0) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first-1, ph_qubit.second)));
-                if (ph_qubit.second != (GRID_SIZE-1))edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second+1)));
-                if (ph_qubit.second != 0) edges.push_back(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second-1)));
+                set<pair<qubit_coord, qubit_coord>> edges = {};
+                if (ph_qubit.first != (GRID_SIZE-1)) edges.insert(make_pair(ph_qubit, make_pair(ph_qubit.first+1, ph_qubit.second)));
+                if (ph_qubit.first != 0) edges.insert(make_pair(ph_qubit, make_pair(ph_qubit.first-1, ph_qubit.second)));
+                if (ph_qubit.second != (GRID_SIZE-1))edges.insert(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second+1)));
+                if (ph_qubit.second != 0) edges.insert(make_pair(ph_qubit, make_pair(ph_qubit.first, ph_qubit.second-1)));
 
                 for (const auto& edge : edges) {
                     if (freezed_ph_qubits.count(edge.first) || freezed_ph_qubits.count(edge.second)) continue;
 
-                    if (edges_ranking.count(edge) == 0) {
-                        edges_ranking[edge] = -swap_penalization;
-                    }
-
-                    if ( ph_qubit == edge.first ){
-                        edges_ranking[edge] += (edge.second.first - ph_qubit.first) * attraction_forces[ph_qubit].first + (edge.second.second - ph_qubit.second) * attraction_forces[ph_qubit].second;
-                    } else {
-                        edges_ranking[edge] += (edge.first.first - ph_qubit.first) * attraction_forces[ph_qubit].first + (edge.first.second - ph_qubit.second) * attraction_forces[ph_qubit].second;
-                    }
+                    edges_ranking[edge] = -swap_penalization;
+                    edges_ranking[edge] += (edge.second.first - ph_qubit.first) * attraction_forces[ph_qubit].first + (edge.second.second - ph_qubit.second) * attraction_forces[ph_qubit].second;
                 }
             }
 
@@ -391,9 +384,9 @@ public:
             it++;
         }
 
-        std::sort(code_index_to_remove.begin(), code_index_to_remove.end(), std::greater<int>());
-        for (int i : code_index_to_remove) {
-            code.erase(code.begin() + i);
-        }
+        // std::sort(code_index_to_remove.begin(), code_index_to_remove.end(), std::greater<int>());
+        // for (int i : code_index_to_remove) {
+        //     code.erase(code.begin() + i);
+        // }
     }
 };

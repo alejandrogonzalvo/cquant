@@ -27,45 +27,57 @@ void Compiler::compile(const string& source, const string& output, const string&
     IncludePass include_pass(&tokens, source);
     run_pass(&include_pass);
 
-    ConstantPropagationPass constant_propagation_pass(&tokens);
-    run_pass(&constant_propagation_pass);
+    // ConstantPropagationPass constant_propagation_pass(&tokens);
+    // run_pass(&constant_propagation_pass);
 
-    while (true) {
-        GateDecompositionPass gate_decomposition_pass(&tokens);
-        run_pass(&gate_decomposition_pass);
+    // cout << "1" << endl;
+    // while (true) {
+    //     GateDecompositionPass gate_decomposition_pass(&tokens);
+    //     run_pass(&gate_decomposition_pass);
 
-        if (!gate_decomposition_pass.replacements) break;
-    }
+    //     if (!gate_decomposition_pass.replacements) break;
+    // }
 
-    while (true) {
-        ForUnrollPass for_unroll_pass(&tokens);
-        run_pass(&for_unroll_pass);
+    // cout << "2" << endl;
 
-        if (!for_unroll_pass.recursive_for_statement) {
-            break;
-        }
-    }
+    // while (true) {
+    //     ForUnrollPass for_unroll_pass(&tokens);
+    //     run_pass(&for_unroll_pass);
 
-    while (true) {
-        ArithmeticPass sum_pass(&tokens);
-        run_pass(&sum_pass);
+    //     if (!for_unroll_pass.recursive_for_statement) {
+    //         break;
+    //     }
+    // }
 
-        if (sum_pass.operations == 0) {
-            break;
-        }
-    }
+    // cout << "3" << endl;
 
-    MappingPass physical_pass(&tokens, architecture_file);
-    run_pass(&physical_pass);
+    // while (true) {
+    //     ArithmeticPass sum_pass(&tokens);
+    //     run_pass(&sum_pass);
 
-    CalibrationPass calibration_pass(&tokens);
-    run_pass(&calibration_pass);
+    //     if (sum_pass.operations == 0) {
+    //         break;
+    //     }
+    // }
+
+    // cout << "4" << endl;
+
+    // MappingPass physical_pass(&tokens, architecture_file);
+    // run_pass(&physical_pass);
+
+    // cout << "5" << endl;
+
+
+    // CalibrationPass calibration_pass(&tokens);
+    // run_pass(&calibration_pass);
 
     OperationGraphPass operation_graph_pass(&tokens);
     run_pass(&operation_graph_pass);
 
+    cout << "6" << endl;
+
     string operations = "";
-    operations += to_string(physical_pass.num_qubits) + ";";
+    operations += to_string(1024) + ";";
     for (auto operation : operation_graph_pass.operations) {
         operations += operation.gate;
         for (auto qubit : operation.qubits) {
@@ -74,8 +86,13 @@ void Compiler::compile(const string& source, const string& output, const string&
         operations += ";";
     }
 
-    OperationsGraph op_graph(operation_graph_pass.operations, physical_pass.num_qubits);
-    
+    OperationsGraph op_graph(operation_graph_pass.operations, 1024);
+    // for (auto const& slice : future_interactions) {
+
+    cout << "7" << endl;
+
+        
+    // }
     vector<RouteForcing::qubit_coord> coords = {};
     for (int i=0; i<GRID_SIZE; i++) {
         for(int j=0; j<GRID_SIZE; j++) {
@@ -106,9 +123,9 @@ void Compiler::compile(const string& source, const string& output, const string&
     // auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start2).count();
     // cout << "C++ time: " << cpp_time << "ms" << endl;
 
-    PrintPass print_pass(&tokens);
-    run_pass(&print_pass);
+    // PrintPass print_pass(&tokens);
+    // run_pass(&print_pass);
 
-    output_stream << compiled_text;
+    // output_stream << compiled_text;
     output_stream.close();
 }

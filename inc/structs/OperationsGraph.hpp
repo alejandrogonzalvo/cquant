@@ -17,8 +17,8 @@ public:
     int qubits;
     vector<Operation> operations;
     set<int> head;
-    map<gate, set<gate>> op_requirements;
-    map<gate, set<gate>> reverse_requirements;
+    unordered_map<gate, set<gate>> op_requirements;
+    unordered_map<gate, set<gate>> reverse_requirements;
 
         OperationsGraph& operator=(const OperationsGraph& other) {
             if (this == &other) {
@@ -36,7 +36,7 @@ public:
     
     OperationsGraph() = default;
     OperationsGraph(vector<Operation>& ops, int qubits) : operations(ops), qubits(qubits) {
-        map<qubit, gate> last_qubit_gate;
+        unordered_map<qubit, gate> last_qubit_gate;
 
         for (gate gate_index = 0; gate_index < operations.size(); gate_index++) {
             Operation& op = operations[gate_index];
@@ -87,17 +87,17 @@ public:
 
     vector<set<int>> get_future_interactions(int k=0) {
         vector<set<int>> interactions = {head};
-        map<gate, int> candidates;
+        unordered_map<gate, int> candidates = {};
 
-        set<int> aux_head = head;
 
         if (k == 0){
             k = 1000;
         }
 
+        set<int>* aux_head = &head;
         for (int i = 0; i < k; i++){
-            for (const gate op_head : aux_head) {
-                for (auto& op_cand : reverse_requirements[op_head]) {
+            for (const gate op_head : *aux_head) {
+                for (const auto& op_cand : reverse_requirements[op_head]) {
                     if (candidates.find(op_cand) != candidates.end()){
                         candidates[op_cand] += 1;
                     } else {
@@ -106,22 +106,24 @@ public:
                 }
             }
 
-            aux_head.clear();
+            aux_head = new set<int>();
+
+
             for (auto& [g, op_cand] : candidates) {
                 if (op_cand >= op_requirements[g].size()){
-                    aux_head.insert(g);
+                    aux_head->insert(g);
                 }
             }
 
-            for (const int op : aux_head){
+            for (const int op : *aux_head){
                 candidates.erase(op);
             }
 
-            if (aux_head.size() == 0){
+            if (aux_head->size() == 0){
                 return interactions;
             }
 
-            interactions.push_back(aux_head);
+            interactions.push_back(*aux_head);
         }
 
         return interactions;
@@ -133,7 +135,7 @@ public:
             op_requirements[op_index].clear();
             head.erase(op_index);
 
-            for (int op_index_2 : reverse_requirements[op_index]) {
+            for (const int& op_index_2 : reverse_requirements[op_index]) {
                 op_requirements[op_index_2].erase(op_index);
 
                 if (op_requirements[op_index_2].empty()) {

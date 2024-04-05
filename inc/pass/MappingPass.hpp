@@ -8,8 +8,9 @@ class MappingPass : public BasePass {
 public:
 
     json data;
-    map<string, string> qubit_map;
+    unordered_map<string, string> qubit_map;
     int num_qubits = 0;
+    int it = 0;
 
     MappingPass(TokenStream *tokens, string json_path) : BasePass(tokens) {
         ifstream json_file(json_path);
