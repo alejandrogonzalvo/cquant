@@ -1,7 +1,9 @@
 #pragma once
 
-#include "pass/BasePass.hpp"
 #include <optional>
+
+#include "pass/BasePass.hpp"
+#include "args.hpp"
 
 class ArithmeticPass : public BasePass {
 private:

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <math.h>
+
 #include "pass/BasePass.hpp"
+#include "args.hpp"
 
 class ConstantPropagationPass : public BasePass {
 public:

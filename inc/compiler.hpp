@@ -3,11 +3,14 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <chrono>
+#include <math.h>
 
 #include "antlr4-runtime.h"
 #include "qasm3Lexer.h"
 #include "pass/Passes.hpp"
-#include "python_wrapper/PythonWrapper.hpp"
+#include "args.hpp"
+// #include "python_wrapper/PythonWrapper.hpp"
 
 #include "structs/OperationsGraph.hpp"
 
@@ -32,5 +35,5 @@ public:
     Compiler() : input(""), lexer(&input), tokens(&lexer), parser(&tokens) {};
     ~Compiler() = default;
 
-    void compile(const string& source, const string& output, const string& mapping_file, const string& architecture_file);
+    void compile();
 };

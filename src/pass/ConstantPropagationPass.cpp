@@ -1,7 +1,10 @@
 #include "pass/ConstantPropagationPass.hpp"
-#include "math.h"
 
 void ConstantPropagationPass::exitProgram(qasm3Parser::ProgramContext *ctx) {
+    if (!args::constant_propagation_enabled) {
+        return;
+    }
+
     Token* pi = CommonTokenFactory::DEFAULT->create(qasm3Parser::Identifier, "pi ").release();
     const_map[pi] = to_string(M_PI);
     for (auto statement : ctx->statement()) {

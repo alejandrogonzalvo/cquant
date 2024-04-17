@@ -1,9 +1,5 @@
 #pragma once
 
-#ifndef GRID_SIZE
-#define GRID_SIZE 32
-#endif
-
 #include <structs/OperationsGraph.hpp>
 #include <string>
 #include <cmath>
@@ -59,6 +55,7 @@ public:
         }
     };
 
+    int GRID_SIZE;
     OperationsGraph op_graph;
     vector<pair<int, int>> topology = {};
     string swap_policy;
@@ -105,10 +102,11 @@ public:
 
 
 public:
-    RouteForcing(OperationsGraph op_graph, vector<pair<int, int>> topology, string swap_policy="unitary") {
+    RouteForcing(OperationsGraph op_graph, vector<pair<int, int>> topology, int GRID_SIZE, string swap_policy="unitary") {
         this->op_graph = op_graph;
         this->topology = topology;
         this->swap_policy = swap_policy;
+        this->GRID_SIZE = GRID_SIZE;
 
         pair<int, int> largest_node = topology.back(); // TODO
         this->grid_x = largest_node.first+1;
@@ -148,7 +146,7 @@ public:
         }
     }
 
-    void map(int k=3, bool edge_fidelity=false, int swap_penalization=0, bool visualize=false, int conv_steps=1e6, int fid_exp=2, float rand_del=0.1, float rand_swap=0.25) {
+    void map(int k=4, bool edge_fidelity=false, float swap_penalization=0.2, bool visualize=false, int conv_steps=1e9, int fid_exp=2, float rand_del=0.1, float rand_swap=0.25) {
         current_placement = initial_placement;
         
         virtual_allocation.clear();
@@ -168,10 +166,8 @@ public:
             time_steps += 1;
 
             if (time_steps > conv_steps) {
-                code = {};
-                added_swaps = 0;
-
-                return;
+                cout << "CONV STEPS LIMIT REACHED" << endl;
+                exit(1);
             }
             
             just_swapped = new_swaps;

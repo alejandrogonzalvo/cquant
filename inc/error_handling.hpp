@@ -1,13 +1,12 @@
+#pragma once
+
 #include <filesystem>
 
 using namespace std;
 namespace fs = std::filesystem;
 
 namespace error_handling {
-    void check_exists(fs::path& p) {
-        if (not fs::exists(p)) {
-            string err_msg = "File " + p.string() + " does not exist"; 
-            throw invalid_argument(err_msg);
-        }
-    }
+    void check_exists(fs::path& p);
+    void check_mandatory_args(int mandatory_args, int REQUIRED_MANDATORY_ARGS);
+    void throw_err(string err_msg);
 }

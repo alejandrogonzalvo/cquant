@@ -1,5 +1,4 @@
 #include "compiler.hpp"
-#include <chrono>
 
 using namespace chrono;
 
@@ -15,69 +14,63 @@ void Compiler::run_pass(BasePass* listener) {
     compiled_text = listener->getText();
 }
 
-void Compiler::compile(const string& source, const string& output, const string& mapping_file, const string& architecture_file) {
+void Compiler::compile() {
     fstream input_stream;
     stringstream string_stream;
 
-    input_stream.open(source);
-    output_stream.open(output);
+    input_stream.open(args::source_path);
+    output_stream.open(args::output_file, ios_base::app);
     string_stream << input_stream.rdbuf();
     compiled_text = string_stream.str();
 
-    IncludePass include_pass(&tokens, source);
+    IncludePass include_pass(&tokens, args::source_path);
     run_pass(&include_pass);
 
-    // ConstantPropagationPass constant_propagation_pass(&tokens);
-    // run_pass(&constant_propagation_pass);
+    ConstantPropagationPass constant_propagation_pass(&tokens);
+    run_pass(&constant_propagation_pass);
 
-    // cout << "1" << endl;
-    // while (true) {
-    //     GateDecompositionPass gate_decomposition_pass(&tokens);
-    //     run_pass(&gate_decomposition_pass);
+    
+    if (args::gate_decompositions == 0) {
+        args::gate_decompositions = 10000;
+    }
 
-    //     if (!gate_decomposition_pass.replacements) break;
-    // }
+    while (args::gate_decompositions > 0) {
+        GateDecompositionPass gate_decomposition_pass(&tokens);
+        run_pass(&gate_decomposition_pass);
 
-    // cout << "2" << endl;
+        if (!gate_decomposition_pass.replacements) break;
+        args::gate_decompositions--;
+    }
 
-    // while (true) {
-    //     ForUnrollPass for_unroll_pass(&tokens);
-    //     run_pass(&for_unroll_pass);
+    while (true) {
+        ForUnrollPass for_unroll_pass(&tokens);
+        run_pass(&for_unroll_pass);
 
-    //     if (!for_unroll_pass.recursive_for_statement) {
-    //         break;
-    //     }
-    // }
+        if (!for_unroll_pass.recursive_for_statement) {
+            break;
+        }
+    }
 
-    // cout << "3" << endl;
+    while (true) {
+        ArithmeticPass sum_pass(&tokens);
+        run_pass(&sum_pass);
 
-    // while (true) {
-    //     ArithmeticPass sum_pass(&tokens);
-    //     run_pass(&sum_pass);
+        if (sum_pass.operations == 0) {
+            break;
+        }
+    }
 
-    //     if (sum_pass.operations == 0) {
-    //         break;
-    //     }
-    // }
-
-    // cout << "4" << endl;
-
-    // MappingPass physical_pass(&tokens, architecture_file);
-    // run_pass(&physical_pass);
-
-    // cout << "5" << endl;
-
-
-    // CalibrationPass calibration_pass(&tokens);
-    // run_pass(&calibration_pass);
+    MappingPass physical_pass(&tokens, args::architecture_file);
+    run_pass(&physical_pass);
 
     OperationGraphPass operation_graph_pass(&tokens);
     run_pass(&operation_graph_pass);
 
-    cout << "6" << endl;
-
     string operations = "";
-    operations += to_string(1024) + ";";
+    int qubit_number = physical_pass.num_qubits;
+    int GRID_SIZE = sqrt(qubit_number);
+
+    operations += to_string(qubit_number) + ";";
     for (auto operation : operation_graph_pass.operations) {
         operations += operation.gate;
         for (auto qubit : operation.qubits) {
@@ -86,13 +79,8 @@ void Compiler::compile(const string& source, const string& output, const string&
         operations += ";";
     }
 
-    OperationsGraph op_graph(operation_graph_pass.operations, 1024);
-    // for (auto const& slice : future_interactions) {
+    OperationsGraph op_graph(operation_graph_pass.operations, qubit_number);
 
-    cout << "7" << endl;
-
-        
-    // }
     vector<RouteForcing::qubit_coord> coords = {};
     for (int i=0; i<GRID_SIZE; i++) {
         for(int j=0; j<GRID_SIZE; j++) {
@@ -101,7 +89,10 @@ void Compiler::compile(const string& source, const string& output, const string&
     }
 
     auto start = high_resolution_clock::now();
-    RouteForcing route_forcing(op_graph, coords);
+    RouteForcing route_forcing(op_graph, coords, GRID_SIZE);
+
+    cout << "qubits: " << qubit_number << endl;
+    cout << "GRID_SIZE: " << GRID_SIZE << endl;
 
     route_forcing.place("trivial");
     route_forcing.map();
@@ -110,6 +101,8 @@ void Compiler::compile(const string& source, const string& output, const string&
 
     auto cpp_time = duration_cast<milliseconds>(high_resolution_clock::now() - start).count();
     cout << "Mapping time: " << cpp_time << "ms" << endl;
+
+    output_stream << qubit_number << "," << static_cast<float>(cpp_time)/1000 << "," << route_forcing.added_swaps << ";";
 
 
     // cout << operations << endl;

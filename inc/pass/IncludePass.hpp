@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pass/BasePass.hpp"
+#include "args.hpp"
 
 using namespace tree;
 

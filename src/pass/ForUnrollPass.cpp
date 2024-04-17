@@ -16,6 +16,10 @@ string ForUnrollPass::unroll_statements(int start_int, int end_int, int step_int
 
 // PUBLIC CLASS METHODS
 void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
+    if (!args::loop_unrolling_enabled) {
+        return;
+    }
+
     if (inside_for_statement) {
         recursive_for_statement = true;
         inside_for_statement++;
@@ -59,5 +63,9 @@ void ForUnrollPass::enterForStatement(qasm3Parser::ForStatementContext *ctx) {
 }
 
 void ForUnrollPass::exitForStatement(qasm3Parser::ForStatementContext *ctx) {
+    if (!args::loop_unrolling_enabled) {
+        return;
+    }
+    
     inside_for_statement--;
 }

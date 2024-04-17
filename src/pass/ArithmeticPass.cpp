@@ -74,6 +74,10 @@ optional<float> ArithmeticPass::arithmeticOperation(qasm3Parser::ExpressionConte
 }
 
 void ArithmeticPass::enterAdditiveExpression(qasm3Parser::AdditiveExpressionContext *ctx) {
+    if(!args::arithmetic_enabled) { 
+        return;
+    }
+
     auto left_side = ctx->expression(0);
     auto right_side = ctx->expression(1);
     Token* operation = ctx->op;
@@ -87,6 +91,10 @@ void ArithmeticPass::enterAdditiveExpression(qasm3Parser::AdditiveExpressionCont
 }
 
 void ArithmeticPass::enterMultiplicativeExpression(qasm3Parser::MultiplicativeExpressionContext *ctx) {
+    if(!args::arithmetic_enabled) { 
+        return;
+    }
+
     auto left_side = ctx->expression(0);
     auto right_side = ctx->expression(1);
     Token* operation = ctx->op;
@@ -100,6 +108,10 @@ void ArithmeticPass::enterMultiplicativeExpression(qasm3Parser::MultiplicativeEx
 }
 
 void ArithmeticPass::enterPowerExpression(qasm3Parser::PowerExpressionContext *ctx) {
+    if(!args::arithmetic_enabled) { 
+        return;
+    }
+    
     auto left_side = ctx->expression(0);
     auto right_side = ctx->expression(1);
     Token* operation = ctx->op;
