@@ -6,6 +6,7 @@ cquant
 output
 *.npz
 .venv
+*.csv
 
 # ignore qft and random circuit qasm examples
 examples/input/qft*
