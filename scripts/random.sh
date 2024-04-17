@@ -21,7 +21,7 @@ do	case "$o" in
 done
 
 RANDOM_FILENAME="examples/input/random_q${qubits}_d${depth}.qasm"
-OUTPUT_FILENAME="examples/output/random_q${qubits}_d${depth}.out"
+OUTPUT_FILENAME="examples/csv/random_res.csv"
 
 echo "Number of qubits: $qubits"
 echo "Depth: $depth"

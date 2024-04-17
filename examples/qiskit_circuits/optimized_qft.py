@@ -23,4 +23,4 @@ with open(output_file, "w") as f:
     
     for i in range(int(qubit_num/2)):
         j: int = qubit_num - i - 1 
-        f.write(f"swap g{i}, g{j};")
+        f.write(f"swap g_{i}, g_{j};")
