@@ -3,9 +3,14 @@ CQUANT (Compiler for QUAntum NeTworks) is a powerful compiler to generate physic
 
 ## Usage
 
-How to build:
+How to build for DEBUG:
 ```bash
-./build.sh
+./build.sh -c 
+```
+
+How to build for RELEASE:
+```bash
+./build.sh -c -r
 ```
 
 How to use:

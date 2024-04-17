@@ -40,16 +40,24 @@ include_directories(${ANTLR_OpenQASMParser_OUTPUT_DIR})
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
 file(GLOB PASS_SOURCES "src/pass/*.cpp")
-file(GLOB WRAPPER_SOURCES "src/python_wrapper/*.cpp")
+# file(GLOB WRAPPER_SOURCES "src/python_wrapper/*.cpp")
 
-add_executable(cquant src/cquant.cpp src/compiler.cpp
+add_executable(cquant src/cquant.cpp src/compiler.cpp src/help.cpp src/error_handling.cpp src/args.cpp
     ${PASS_SOURCES}
     ${WRAPPER_SOURCES}
     ${ANTLR_OpenQASMLexer_CXX_OUTPUTS}
     ${ANTLR_OpenQASMParser_CXX_OUTPUTS}
 )
 
-target_compile_options(cquant PUBLIC -O3)
-target_compile_options(antlr4_static INTERFACE -O3)
+if(${RELEASE})
+    message("release")
+    target_compile_options(cquant PUBLIC -O3)
+    target_compile_options(antlr4_static INTERFACE -O3)
+else()
+    message("debug")
+    target_compile_options(cquant PUBLIC -Og -g3)
+    target_compile_options(antlr4_static INTERFACE -Og -g3)   
+endif()
 
-target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json python3.10)
+# target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json python3.11)
+target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json)

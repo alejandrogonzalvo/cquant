@@ -3,13 +3,23 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "${SCRIPT_DIR}/../"
 
+<<<<<<< HEAD
 OPTSTRING=":c"
+=======
+c=0
+r=0
+OPTSTRING=":cr"
+>>>>>>> 76b1dcf (add support for release and debug builds)
 
 while getopts ${OPTSTRING} opt; do
   case ${opt} in
     c)
       echo "Cleaning up the build directory."
       c=1
+      ;;
+    r)
+      echo "Building for release."
+      r=1
       ;;
     ?)
       echo "Invalid option: -${OPTARG}."
@@ -29,7 +39,13 @@ then
   sudo rm -r *
 fi
 
-cmake ..
+if [ $r == 1 ]
+then 
+  cmake -DRELEASE:INT=1 ..
+else
+  cmake ..
+fi
+
 make
 
 if [ $? != 0 ]
