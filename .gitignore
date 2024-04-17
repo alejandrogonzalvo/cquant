@@ -5,3 +5,8 @@ build
 cquant
 output
 *.npz
+.venv
+
+# ignore qft and random circuit qasm examples
+examples/input/qft*
+examples/input/random*
