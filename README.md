@@ -1,6 +1,13 @@
 # CQUANT
 CQUANT (Compiler for QUAntum NeTworks) is a powerful compiler to generate physical OpenQASM3 from high level OpenQASM3 code and an architecture JSON file.
 
+## Dependencies
+Cquant is currently in unstable development and no standard installer has been made.
+
+For development, you can find a Dockerfile ready with all the dependencies ready for building and executing cquant.
+
+You can use vscode dev containers to open vscode in the Docker environment and develop cquant from there.
+
 ## Usage
 
 How to build for DEBUG:
