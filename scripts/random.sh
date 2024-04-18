@@ -48,7 +48,7 @@ then
     exit 1
 fi
 
-./cquant -o $OUTPUT_FILENAME -a examples/architecture_files/2Dgrid.json -m examples/mapping_algorithms/HQA/cquant_test.py $RANDOM_FILENAME
+./cquant -o $OUTPUT_FILENAME -a examples/architecture_files/2Dgrid.json -m examples/mapping_algorithms/HQA/cquant_test.py --no-include-pass --no-arithmetic-pass --no-calibration-pass --no-loop-unrolling  $RANDOM_FILENAME
 
 if [ $? != 0 ]
 then
