@@ -146,7 +146,7 @@ public:
         }
     }
 
-    void map(int k=4, bool edge_fidelity=false, float swap_penalization=0.2, bool visualize=false, int conv_steps=1e9, int fid_exp=2, float rand_del=0.1, float rand_swap=0.25) {
+    void map(int k=1, bool edge_fidelity=false, float swap_penalization=0.2, bool visualize=false, int conv_steps=1e9, int fid_exp=2, float rand_del=0.1, float rand_swap=0.25) {
         current_placement = initial_placement;
         
         virtual_allocation.clear();

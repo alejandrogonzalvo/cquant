@@ -55,9 +55,10 @@ if(${RELEASE})
     target_compile_options(antlr4_static INTERFACE -O3)
 else()
     message("debug")
-    target_compile_options(cquant PUBLIC -Og -g3)
-    target_compile_options(antlr4_static INTERFACE -Og -g3)   
+    target_compile_options(cquant PUBLIC -O0 -g3)
+    target_compile_options(antlr4_static INTERFACE -O0 -g3)   
 endif()
+
 
 # target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json python3.11)
 target_link_libraries(cquant antlr4_static nlohmann_json::nlohmann_json)

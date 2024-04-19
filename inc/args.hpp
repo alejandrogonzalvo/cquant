@@ -23,6 +23,7 @@ namespace args {
     extern bool arithmetic_enabled;
     extern bool mapping_enabled;
     extern bool instruction_calibration_enabled;
+    extern bool print_pass_enabled;
 
 
     void parse(int argc, char* argv[]);

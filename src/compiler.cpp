@@ -104,7 +104,6 @@ void Compiler::compile() {
 
     output_stream << qubit_number << "," << static_cast<float>(cpp_time)/1000 << "," << route_forcing.added_swaps << ";";
 
-
     // cout << operations << endl;
     // vector<string> args = {operations, to_string(physical_pass.data["network"]["core_number"]), to_string(physical_pass.data["network"]["qubit_number"])};
     // PythonWrapper::run_file(mapping_file, args);

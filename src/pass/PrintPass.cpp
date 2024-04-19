@@ -3,10 +3,16 @@
 // PUBLIC CLASS METHODS
 
 void PrintPass::enterProgram(qasm3Parser::ProgramContext *ctx) {
+    if (!args::print_pass_enabled) {
+        return;
+    }
+
+    program = "";
     for (auto terminal_node : getTerminalNodes(ctx)) {
         Token* token = terminal_node->getSymbol();
+        program += terminal_node->getText();
         if(is_endline_token(token->getType())) {
-            rewriter.insertAfter(token->getTokenIndex(), "\n");
+            program += "\n";
         }
     }
 }

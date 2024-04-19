@@ -17,6 +17,7 @@ namespace args {
     bool arithmetic_enabled = true;
     bool mapping_enabled = true;
     bool instruction_calibration_enabled = true;
+    bool print_pass_enabled = true;
     
 
 
@@ -32,6 +33,7 @@ namespace args {
         const uint8_t NO_ARITHMETIC_PASS = 4;
         const uint8_t NO_MAPPING_PASS = 5;
         const uint8_t NO_CALIBRATION_PASS = 6;
+        const uint8_t NO_PRINT_PASS = 7;
 
         static struct option long_options[] = {
             {"no-include-pass", no_argument, 0, NO_INCLUDE_PASS},
@@ -39,6 +41,7 @@ namespace args {
             {"no-arithmetic-pass", no_argument, 0, NO_ARITHMETIC_PASS},
             {"no-mapping-pass", no_argument, 0, NO_MAPPING_PASS},
             {"no-calibration-pass", no_argument, 0, NO_CALIBRATION_PASS},
+            {"no-print-pass", no_argument, 0 , NO_PRINT_PASS},
             {"output-file", required_argument, 0, 'o'},
             {"mapping-file", required_argument, 0, 'm'},
             {"architecture-file", required_argument, 0, 'a'},
@@ -89,6 +92,9 @@ namespace args {
                 break;
             case NO_CALIBRATION_PASS:
                 instruction_calibration_enabled = false;
+                break;
+            case NO_PRINT_PASS:
+                print_pass_enabled = false;
                 break;
             default:
                 help::print();
